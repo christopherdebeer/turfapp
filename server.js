@@ -42,7 +42,7 @@ function addUser (source, sourceUser) {
   return user;
 }
 
-everyauth.twitter
+everyauth.twitter 
   .consumerKey('AXZutButmsl4Q40cLTcJmg')
   .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
   .callbackPath('/auth/twitter/callback')
@@ -141,6 +141,7 @@ userTag.save(function(err){if (err) throw err;})
 // Homepage //  main app
 app.get('/', function(req, res){
 
+  console.log(req.user);
 
   Tag.find({}, function (err, docs) {
 
