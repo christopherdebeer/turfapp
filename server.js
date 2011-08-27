@@ -9,43 +9,14 @@ require('nko')('4mmjIcGPANGpqTsG');
 
 var express = require('express')
     ,mongoose = require('mongoose')
-    ,everyauth = require ('everyauth');
+    ,Schema = mongoose.Schema
+    ,mongooseAuth = require('mongoose-auth')
 
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////// Everyauth ///////////////////////////////////////////////////////////////
+/////////////////////////////////// Config ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-var usersById = {};
-var usersByTwitterId = {};
-
-everyauth.everymodule
-  .findUserById( function (id, callback) {
-    callback(null, usersById[id]);
-});
-
-function addUser (source, sourceUser) {
-  var user;
-  if (arguments.length === 1) { // password-based
-    user = sourceUser = source;
-    user.id = ++nextUserId;
-    return usersById[nextUserId] = user;
-  } else { // non-password-based
-    user = usersById[++nextUserId] = {id: nextUserId};
-    user[source] = sourceUser;
-  }
-  return user;
-}
-
-everyauth.twitter
-  .consumerKey('AXZutButmsl4Q40cLTcJmg')
-  .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
-  .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitterUserMetadata) {
-    // find or create user logic goes here
-  })
-  .redirectPath('/');
 
 
 // Configuration
@@ -58,9 +29,9 @@ app.configure(function(){
   app.use(express.favicon());
   app.use(express.cookieParser());
   app.use(express.session({secret: 'turfappsecret'}));
-  app.use(everyauth.middleware());
+  app.use(mongooseAuth.middleware());
   app.use(express.methodOverride());
-  app.use(app.router);
+  //app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
 
@@ -79,30 +50,38 @@ app.configure('production', function(){
 /////////////////////////////////// DB Mongo stuff ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+var UserSchema = new Schema({})
+      , User;
 
-// mongoose.connect('mongodb://user:changeme@staff.mongohq.com:10079/turf', function(err) {
-//     if (err) throw err;
-// });
+// STEP 1: Schema Decoration and Configuration for the Routing
+UserSchema.plugin(mongooseAuth, {
+    // Here, we attach your User model to every module
+    everymodule: {
+      everyauth: {
+          User: function () {
+            return User;
+          }
+      }
+    }
 
-// var Schema = mongoose.Schema
-//   , ObjectId = Schema.ObjectId;
+  , facebook: {
+      everyauth: {
+          myHostname: 'http://turf.no.de'
+        , appId: 'AXZutButmsl4Q40cLTcJmg'
+        , appSecret: 'S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik'
+        , redirectPath: '/'
+      }
+    }
+});
 
-// var Point = new Schema({
-//     user      : String
-//   , faction   : String
-//   , lat       : Number
-//   , lon       : Number
-//   , created   : Date
-// });
+mongoose.model('User', UserSchema);
 
-// var Tag = mongoose.model('test', Point);
+mongoose.connect('mongodb://localhost/example');
 
-// var userTag = new Tag();
-// userTag.user = "christopherdbNew";
-// userTag.save(function(err){if (err) throw err;})
-
+User = mongoose.model('User');
 
 
+mongooseAuth.helpExpress(app);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// Routes //////////////////////////////////////////////////////
