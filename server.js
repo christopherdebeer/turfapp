@@ -47,15 +47,7 @@ everyauth.twitter
   })
   .redirectPath('/');
 
-var express = require('express');
-   var app = express.createServer(
-       express.favicon()
-     , express.bodyParser()
-     , express.cookieParser()
-     , express.session({secret: 'mr ripley'})
-     , everyauth.middleware()
-     , express.router(routes)
-   );
+
 // Configuration
 var app = module.exports = express.createServer();
 
