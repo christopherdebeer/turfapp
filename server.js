@@ -143,19 +143,19 @@ app.get('/', function(req, res){
 
   console.log(req.user);
 
+  data = {
+    title: "Turf",
+    user: req.user,
+    tags: {}
+  }
+
   Tag.find({}, function (err, docs) {
 
-    if (err) {
-      res.render('index', {
-        title: 'Turf',
-        tags: "couldnt find any"
-      });
-    } else {
-      res.render('index', {
-        title: 'Turf',
-        tags: JSON.stringify(docs)
-      });
+    if (!err) {
+      data.tags = JSON.stringify(docs)
     }
+
+    res.render('index', data);
     
   });
     
