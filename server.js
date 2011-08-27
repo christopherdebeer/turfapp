@@ -86,26 +86,44 @@ app.configure('production', function(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// mongoose.connect('mongodb://user:changeme@staff.mongohq.com:10079/turf', function(err) {
-//     if (err) throw err;
-// });
+mongoose.connect('mongodb://user:changeme@staff.mongohq.com:10079/turf', function(err) {
+    if (err) throw err;
+});
 
-// var Schema = mongoose.Schema
-//   , ObjectId = Schema.ObjectId;
+var Schema = mongoose.Schema
+  , ObjectId = Schema.ObjectId;
 
-// var Point = new Schema({
-//     user      : String
-//   , faction   : String
-//   , lat       : Number
-//   , lon       : Number
-//   , created   : Date
-// });
 
-// var Tag = mongoose.model('test', Point);
+var Faction = new Schema({
+    name        : String
+  , sponsor     : {
+        name      : String
+      , url       : String 
+    }
+  , members     : [User]
+});
 
-// var userTag = new Tag();
-// userTag.user = "christopherdbNew";
-// userTag.save(function(err){if (err) throw err;})
+var User = new Schema({
+    username    : String
+  , xp          : Number
+  , faction     : String
+  , created     : Date
+  , tags        : [Point]
+});
+
+var Point = new Schema({
+    user      : String
+  , faction   : String
+  , lat       : Number
+  , lon       : Number
+  , created   : Date
+});
+
+var Tag = mongoose.model('testNew', Point);
+
+var userTag = new Tag();
+userTag.user = "new mongoose tests";
+userTag.save(function(err){if (err) throw err;})
 
 
 
