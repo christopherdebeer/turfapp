@@ -53,8 +53,13 @@ app.configure('production', function(){
 
 
 everyauth.twitter
+  .entryPath('/auth/twitter')
+  .callbackPath('/auth/twitter/callback')
   .consumerKey('AXZutButmsl4Q40cLTcJmg')
   .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
+  .handleAuthCallbackError( function (req, res) {
+    // on denied
+  });
   .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitterUserMetadata) {
     // find or create user logic goes here
   })
