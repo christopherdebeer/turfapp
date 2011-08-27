@@ -21,22 +21,16 @@ var express = require('express')
 
 
 //Configuration
-var app = module.exports = express.createServer(
-  express.bodyParser()
-  , express.static(__dirname + "/public")
-  , express.cookieParser()
-  , express.session({ secret: 'htuayreve'})
-  , everyauth.middleware()
-);
+var app = module.exports = express.createServer();
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  app.use(express.favicon());
-  //app.use(mongooseAuth.middleware());
+  app.use(express.bodyParser());
   app.use(express.methodOverride());
-  //app.use(app.router);
-  app.use();
+  app.use(app.router);
+  app.use(everyauth.middleware());
+  app.use(express.static(__dirname + '/public'));
 });
 
 
