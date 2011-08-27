@@ -192,11 +192,11 @@ app.post('/tag', function(req, res) {
     
 
     var newTag = new Tag();
-    newTag.username = tagAttempt.username;
+    newTag.user = tagAttempt.username;
     newTag.loc      = tagAttempt.loc;
     
     // need to add faction checker
-    
+
     newTag.save(function(err){
       if (err) {
         res.send({ result : {
