@@ -10,8 +10,8 @@ require('nko')('4mmjIcGPANGpqTsG');
 var express = require('express')
     ,mongoose = require('mongoose')
     ,everyauth = require('everyauth')
-    ,Schema = mongoose.Schema
-    ,mongooseAuth = require('mongoose-auth')
+    ,Schema = mongoose.Schema;
+    //,mongooseAuth = require('mongoose-auth')
 
 
 
@@ -20,35 +20,25 @@ var express = require('express')
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Configuration
-// var app = module.exports = express.createServer();
+Configuration
+var app = module.exports = express.createServer();
 
-// app.configure(function(){
-//   app.set('views', __dirname + '/views');
-//   app.set('view engine', 'jade');
-//   app.use(express.bodyParser());
-//   app.use(express.favicon());
-//   app.use(express.cookieParser());
-//   app.use(express.session({secret: 'turfappsecret'}));
-//   //app.use(everyauth.middleware());
-//   app.use(mongooseAuth.middleware());
-//   app.use(express.methodOverride());
-//   //app.use(app.router);
-//   app.use(express.static(__dirname + '/public'));
-// });
+app.configure(function(){
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+  app.use(express.bodyParser());
+  app.use(express.favicon());
+  app.use(express.cookieParser());
+  app.use(express.session({secret: 'turfappsecret'}));
+  app.use(everyauth.middleware());
+  //app.use(mongooseAuth.middleware());
+  app.use(express.methodOverride());
+  //app.use(app.router);
+  app.use(express.static(__dirname + '/public'));
+});
 
-var app = express.createServer(
-        express.bodyParser()
-      , express.static(__dirname + "/public")
-      , express.cookieParser()
-      , express.session({ secret: 'esoognom'})
 
-        // STEP 2: Add in the Routing
-      , mongooseAuth.middleware()
-      ,express.static(__dirname + '/public')
-    );
-
-mongooseAuth.helpExpress(app);
+everyauth.helpExpress(app);
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
@@ -59,39 +49,50 @@ app.configure('production', function(){
 });
 
 
+// every auth setup
+
+
+everyauth.twitter
+  .consumerKey('AXZutButmsl4Q40cLTcJmg')
+  .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
+  .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitterUserMetadata) {
+    // find or create user logic goes here
+  })
+  .redirectPath('/');
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// DB Mongo stuff ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var UserSchema = new Schema({})
-      , User;
+// var UserSchema = new Schema({})
+//       , User;
 
-// STEP 1: Schema Decoration and Configuration for the Routing
-UserSchema.plugin(mongooseAuth, {
-    // Here, we attach your User model to every module
-    everymodule: {
-      everyauth: {
-          User: function () {
-            return User;
-          }
-      }
-    }
+// // STEP 1: Schema Decoration and Configuration for the Routing
+// UserSchema.plugin(mongooseAuth, {
+//     // Here, we attach your User model to every module
+//     everymodule: {
+//       everyauth: {
+//           User: function () {
+//             return User;
+//           }
+//       }
+//     }
 
-  , twitter: {
-      everyauth: {
-          myHostname: 'http://turf.no.de'
-        , appId: 'AXZutButmsl4Q40cLTcJmg'
-        , appSecret: 'S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik'
-        , redirectPath: '/'
-      }
-    }
-});
+//   , twitter: {
+//       everyauth: {
+//           myHostname: 'http://turf.no.de'
+//         , appId: 'AXZutButmsl4Q40cLTcJmg'
+//         , appSecret: 'S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik'
+//         , redirectPath: '/'
+//       }
+//     }
+// });
 
-mongoose.model('User', UserSchema);
+// mongoose.model('User', UserSchema);
 
-mongoose.connect('mongodb://user:changeme@staff.mongohq.com:10079/turf');
+// mongoose.connect('mongodb://user:changeme@staff.mongohq.com:10079/turf');
 
-User = mongoose.model('User');
+// User = mongoose.model('User');
 
 
 
