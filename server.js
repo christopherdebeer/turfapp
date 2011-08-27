@@ -28,6 +28,8 @@ everyauth.everymodule
 });
 
 function addUser (source, sourceUser) {
+
+  console.log("adding user source: ", source, "sourceUser: ", sourceUser);
   var user;
   if (arguments.length === 1) { // password-based
     user = sourceUser = source;
