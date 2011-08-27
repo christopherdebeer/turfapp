@@ -31,10 +31,10 @@ var Faction = new Schema({
         name      : String
       , url       : String 
     }
-  , members     : [User]
+  , members     : [Person]
 });
 
-var User = new Schema({
+var Person = new Schema({
     id          : String
   , name        : { type: String, unique: true }
   , xp          : Number
@@ -55,8 +55,8 @@ Point.methods.findPointsNear = function findPointsNear (cb) {
   return this.find({}, cb);
 }
 
-var Tag = mongoose.model('testNew', Point);
-var Tag = mongoose.model('User', User);
+var Tag = mongoose.model('Tag', Point);
+var User = mongoose.model('User', Person);
 
 var userTag = new Tag();
 userTag.user = "new mongoose tests";
