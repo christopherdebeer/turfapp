@@ -106,7 +106,7 @@ $(document).ready( function () {
 	turf.createCircle(turf.locations.edinburgh, 100);
 	$(turf.points).each( function (i,e) {
 		//console.log(i,e);
-		var tmp = new google.maps.LatLng (e.lat, e.lng);
+		var tmp = new google.maps.LatLng (e.loc[0], e.loc[1]);
 		turf.createCircle(tmp,100);
 		turf.tags.push(tmp);
 	});
@@ -128,7 +128,7 @@ $(document).ready( function () {
 
 			turf.createCircle(event.latLng,100)
     		if (window.console) { console.log("tag created at location:", event.latLng); }
-    		turf.tags.push(event.latLng);
+    		turf.tags.push(tag);
     		// var newHull = turf.getConvexHullPoints(turf.tags);
     		// turf.createPolygon(newHull);
 		  }
