@@ -185,8 +185,19 @@ app.get('/faction/:id', function(req, res){
 //  utility paths
 
 // post tags
-app.post('/tag', function(req, res){
-  res.send(req.body);
+app.post('/tag', function(req, res) {
+  
+  var tagAttempt = req.body;
+  if (tagAttempt.username && tagAttempt.loc && tagAttempt.secret) {
+    
+  } else {
+    res.send({ err : {
+      msg: "Not good tag",
+      req: tagAttempt
+    }});
+    console.log("Failed tagAttempt", tagAttempt );
+  }
+  
 });
 
 // get now() // an authentication path

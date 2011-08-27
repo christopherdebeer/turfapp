@@ -115,9 +115,11 @@ $(document).ready( function () {
 		
 		// ?Na=" + event.latLng.P.Na.toString() + "&Oa=" + event.latLng.P.Oa.toString()
 		var tag = {
-			lat: event.latLng.lat(),
-			lng: event.latLng.lng(),
+			username: "Testuser",
+			loc : [] event.latLng.lat(), event.latLng.lng() ],
+			secret: "secretString"
 		}
+		
     	$.ajax({
 		  url: "http://turf.no.de/tag",
 		  data: tag,
