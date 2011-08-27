@@ -37,7 +37,7 @@ app.configure('production', function(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-mongoose.connect('mongodb://<user>:<password>@staff.mongohq.com:10079/turf ', function(err) {
+mongoose.connect('mongodb://127.0.0.1/test', function(err) {
     if (err) throw err;
 });
 
