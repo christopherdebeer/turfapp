@@ -120,7 +120,7 @@ var Point = new Schema({
 
 
 Point.methods.findPointsNear = function findPointsNear (cb) {
-  return this.find({} }, cb);
+  return this.find({}, cb);
 }
 
 var Tag = mongoose.model('testNew', Point);
