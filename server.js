@@ -17,9 +17,10 @@ var express = require('express'),
 /////////////////////////////////// Everyauth /// ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+everyauth.debug = true;
 var usersById = {};
-var usersByTwitterId = {};
+var usersByTwitId = {};
+var nextUserId = 0;
 
 everyauth.everymodule
   .findUserById( function (id, callback) {
@@ -33,7 +34,7 @@ function addUser (source, sourceUser) {
     user.id = ++nextUserId;
     return usersById[nextUserId] = user;
   } else { // non-password-based
-    user = usersById[++nextUserId] = {id: nextUserId};
+    user = usersByTwitId[++nextUserId] = {id: nextUserId};
     user[source] = sourceUser;
   }
   return user;
@@ -43,19 +44,14 @@ everyauth.twitter
   .consumerKey('AXZutButmsl4Q40cLTcJmg')
   .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
   .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitterUserMetadata) {
-    // find or create user logic goes here
+    return usersByTwitId[twitUser.id] || (usersByTwitId[twitUser.id] = addUser('twitter', twitUser));
   })
   .redirectPath('/');
 
-// var express = require('express');
-//    var app = express.createServer(
-//        express.favicon()
-//      , express.bodyParser()
-//      , express.cookieParser()
-//      , express.session({secret: 'mr ripley'})
-//      , everyauth.middleware()
-//      , express.router(routes)
-//    );
+
+
+
+
 // Configuration
 var app = module.exports = express.createServer();
 
