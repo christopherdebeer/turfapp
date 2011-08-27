@@ -59,7 +59,7 @@ everyauth.twitter
   .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
   .handleAuthCallbackError( function (req, res) {
     // on denied
-  });
+  })
   .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitterUserMetadata) {
     // find or create user logic goes here
   })
