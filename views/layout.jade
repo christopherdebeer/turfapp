@@ -11,4 +11,8 @@ html
     script(src='/javascripts/jquery-1.6.2.min.js')
     script(src='/javascripts/modernizr.custom.min.js')
     script(src='http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=true')
+    script(type='text/javascript')
+        var turf = turf || {};
+        turf.user = everyauth.user;
+        if(window.console) console.log("we have a user", turf.user);
   body!= body
