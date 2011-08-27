@@ -69,7 +69,7 @@ var nextUserId = 0;
 
 everyauth.everymodule
   .findUserById( function (id, callback) {
-    callback(null, usersById[id]);
+   User.findById(userId, callback);
 });
 
 function addUser (source, sourceUser) {
