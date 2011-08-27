@@ -7,10 +7,10 @@ require('nko')('4mmjIcGPANGpqTsG');
  */
 
 
-var express = require('express'),
-    mongoose = require('mongoose'),
-    everyauth = require ('everyauth'),
-    connect = require('connect');
+var express = require('express')
+    ,mongoose = require('mongoose');
+//    ,everyauth = require ('everyauth');
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
 });
 
-everyauth.helpExpress(app);
+//everyauth.helpExpress(app);
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
