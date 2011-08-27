@@ -43,7 +43,7 @@ var app = express.createServer(
      , express.cookieParser()
      , express.session({secret: 'turfappsecret'})
      , everyauth.middleware()
-     , express.router(routes)
+     , express.router()
      , express.static(__dirname + '/public')
    );
 
