@@ -78,7 +78,7 @@ UserSchema.plugin(mongooseAuth, {
 
 mongoose.model('User', UserSchema);
 
-mongoose.connect('mongodb://localhost/example');
+mongoose.connect('mongodb://user:changeme@staff.mongohq.com:10079/turf');
 
 User = mongoose.model('User');
 
