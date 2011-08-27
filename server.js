@@ -30,6 +30,7 @@ app.configure(function(){
   app.use(express.favicon());
   app.use(express.cookieParser());
   app.use(express.session({secret: 'turfappsecret'}));
+  app.use(everyauth.middleware());
   app.use(mongooseAuth.middleware());
   app.use(express.methodOverride());
   //app.use(app.router);
