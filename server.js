@@ -121,7 +121,6 @@ app.configure('production', function(){
 // Homepage //  main app
 app.get('/', function(req, res){
 
-  userTag.find({}, function (err, docs) {
     res.render('index', {
       title: 'Turf'
     });
