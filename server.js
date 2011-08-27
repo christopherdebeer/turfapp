@@ -38,7 +38,7 @@ app.configure(function(){
 });
 
 
-everyauth.helpExpress(app);
+
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
@@ -51,6 +51,12 @@ app.configure('production', function(){
 
 // every auth setup
 
+var usersById = {};
+
+everyauth.everymodule
+ .findUserById( function (id, callback) {
+   callback(null, usersById[id]);
+ });
 
 everyauth.twitter
   .entryPath('/auth/twitter')
@@ -169,6 +175,6 @@ app.get('/now', function(req, res){
 ///////////////////////////////////////////////// GOGOGO //////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+everyauth.helpExpress(app);
 app.listen(80);
 console.log("Turfapp server listening on port %d in %s mode", app.address().port, app.settings.env);
