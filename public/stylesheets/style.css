@@ -35,13 +35,21 @@ h1 {
   top: 55%;
   z-index: 1; }
   #content .inner {
-    margin: 20px;
+    margin: 35px 20px 20px;
     display: block; }
+    #content .inner #leftCol {
+      width: 300px;
+      display: inline;
+      float: left; }
+    #content .inner #rightCol {
+      width: 300px;
+      display: inline;
+      float: left; }
 
 #twSignin {
   display: block;
   background: url("/images/twitter-button.gif") top left no-repeat transparent;
   text-indent: -1000em;
   height: 43px;
-  width: 25px;
+  width: 250px;
   border: 0 none; }

@@ -40,8 +40,18 @@ h1 {
 	top: 55%;
 	z-index: 1;
 	.inner {
-		margin:20px;
+		margin: 35px 20px 20px;
 		display: block;
+		#leftCol {
+			width: 300px;
+			display:inline;
+			float:left;
+		}
+		#rightCol {
+			width:300px;
+			display: inline;
+			float: left;
+		}
 
 	}
 }
@@ -52,6 +62,6 @@ h1 {
 	background: url("/images/twitter-button.gif") top left no-repeat transparent;
 	text-indent :-1000em;
 	height: 43px;
-	width: 25px;
+	width: 250px;
 	border: 0 none;
 }
