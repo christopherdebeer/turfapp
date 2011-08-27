@@ -119,7 +119,7 @@ $(document).ready( function () {
 			lng: event.latLng.lng(),
 		}
     	$.ajax({
-		  url: "http://christopherdebeer.no.de/tag",
+		  url: "http://turf.no.de/tag",
 		  data: tag,
 		  type: "POST",
 		  success: function () {

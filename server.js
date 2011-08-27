@@ -104,7 +104,7 @@ var Faction = new Schema({
 });
 
 var User = new Schema({
-    username    : String
+    name        : { type: String, unique: true }
   , xp          : Number
   , faction     : String
   , created     : Date
@@ -114,10 +114,14 @@ var User = new Schema({
 var Point = new Schema({
     user      : String
   , faction   : String
-  , lat       : Number
-  , lon       : Number
+  , loc       : [];
   , created   : Date
 });
+
+
+Point.methods.findPointsNear = function findPointsNear (cb) {
+  return this.find({} }, cb);
+}
 
 var Tag = mongoose.model('testNew', Point);
 
