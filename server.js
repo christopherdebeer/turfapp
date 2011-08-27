@@ -9,6 +9,7 @@ require('nko')('4mmjIcGPANGpqTsG');
 
 var express = require('express')
     ,mongoose = require('mongoose')
+    .everyauth = require('everyauth')
     ,Schema = mongoose.Schema
     ,mongooseAuth = require('mongoose-auth')
 
@@ -35,7 +36,7 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
 });
 
-everyauth.helpExpress(app);
+mongooseAuth.helpExpress(app);
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
@@ -64,7 +65,7 @@ UserSchema.plugin(mongooseAuth, {
       }
     }
 
-  , facebook: {
+  , twitter: {
       everyauth: {
           myHostname: 'http://turf.no.de'
         , appId: 'AXZutButmsl4Q40cLTcJmg'
@@ -81,7 +82,7 @@ mongoose.connect('mongodb://localhost/example');
 User = mongoose.model('User');
 
 
-mongooseAuth.helpExpress(app);
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// Routes //////////////////////////////////////////////////////
