@@ -54,8 +54,6 @@ everyauth.twitter
 
 
 
-
-
 // Configuration
 var app = module.exports = express.createServer();
 
