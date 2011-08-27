@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {
     "express": "2.4.6",
-    "sass": ">= 0.0.1",
     "jade": ">= 0.0.1",
-    "nko": "~0.1.0"
+    "nko": "~0.1.0",
+    "mongoose": "2.0.2"
   },
   "scripts": {
     "start": "node server.js"
