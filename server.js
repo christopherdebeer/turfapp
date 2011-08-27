@@ -7,14 +7,12 @@ require('nko')('4mmjIcGPANGpqTsG');
  */
 
 
-
-
-
 var express = require('express');
 var mongoose = require('mongoose');
 
 
 // Configuration
+var app = module.exports = express.createServer();
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
