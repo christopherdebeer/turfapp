@@ -1,0 +1,18 @@
+{
+  "author": "Christopher de Beer <christopherdebeer@gmail.com> (empirecollective.co.uk)",
+  "name": "turf",
+  "description": "a geo-social warfare app",
+  "version": "0.0.1",
+  "homepage": "turf.no.de",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nko2/nodule.git"
+  },
+  "engines": {
+    "node": "v0.4.9"
+  },
+  "dependencies": {
+    "nko": "~0.1.0"
+  },
+  "devDependencies": {}
+}
