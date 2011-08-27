@@ -113,9 +113,9 @@ var User = new Schema({
 
 var Point = new Schema({
     user      : String
-  , faction   : String
+  , faction   : { type: String, default: ""}
   , loc       : [{type: Number},{type: Number}]
-  , created   : Date
+  , created   : { type: Date, default: Date.now}
 });
 
 
@@ -194,8 +194,9 @@ app.post('/tag', function(req, res) {
     var newTag = new Tag();
     newTag.username = tagAttempt.username;
     newTag.loc      = tagAttempt.loc;
-    newTag.faction  = "None";
-    newTag.created  = "The DateTime now";
+    
+    // need to add faction checker
+    
     newTag.save(function(err){
       if (err) {
         res.send({ result : {
