@@ -12,32 +12,87 @@ var express = require('express'),
     everyauth = require ('everyauth'),
     connect = require('connect');
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// DB Mongo stuff ////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+mongoose.connect('mongodb://user:changeme@staff.mongohq.com:10079/turf', function(err) {
+    if (err) throw err;
+});
+
+var Schema = mongoose.Schema
+  , ObjectId = Schema.ObjectId;
+
+
+var Faction = new Schema({
+    name        : String
+  , sponsor     : {
+        name      : String
+      , url       : String 
+    }
+  , members     : [User]
+});
+
+var User = new Schema({
+    id          : String
+  , name        : { type: String, unique: true }
+  , xp          : Number
+  , faction     : String
+  , created     : Date
+  , tags        : [Point]
+});
+
+var Point = new Schema({
+    user      : String
+  , faction   : { type: String, default: ""}
+  , loc       : [{type: Number},{type: Number}]
+  , created   : { type: Date, default: Date.now}
+});
+
+
+Point.methods.findPointsNear = function findPointsNear (cb) {
+  return this.find({}, cb);
+}
+
+var Tag = mongoose.model('testNew', Point);
+var Tag = mongoose.model('User', User);
+
+var userTag = new Tag();
+userTag.user = "new mongoose tests";
+userTag.save(function(err){if (err) throw err;})
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// Everyauth /// ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-everyauth.debug = true;
+//ryauth.debug = true;
 var usersById = {};
-var usersByTwitId = {};
 var nextUserId = 0;
 
 everyauth.everymodule
   .findUserById( function (id, callback) {
-    callback(null, usersByTwitId[id]);
+    callback(null, usersById[id]);
 });
 
 function addUser (source, sourceUser) {
 
-  console.log("adding user source: ", source, "sourceUser: ", sourceUser);
   var user;
   if (arguments.length === 1) { // password-based
     user = sourceUser = source;
     user.id = ++nextUserId;
     return usersById[nextUserId] = user;
   } else { // non-password-based
-    user = usersByTwitId[++nextUserId] = {id: nextUserId};
+    user = usersById[++nextUserId] = {id: nextUserId};
     user[source] = sourceUser;
+    var newUser = new User();
+    newUser = {
+      id: sourceUser.id,
+      name: sourceUser.name
+    }
+    newUser.save(function(err){if (err) throw err;})
   }
   return user;
 }
@@ -48,7 +103,7 @@ everyauth.twitter
   .callbackPath('/auth/twitter/callback')
   .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitUser) {
     console.log("findOrCreateUser function callded", twitUser);
-    return usersByTwitId[twitUser.id] || (usersByTwitId[twitUser.id] = addUser('twitter', twitUser));
+    return usersById[twitUser.id] || (usersById[twitUser.id] = addUser('twitter', twitUser));
   })
   .redirectPath('/');
 
@@ -81,53 +136,6 @@ app.configure('production', function(){
 });
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////// DB Mongo stuff ////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-mongoose.connect('mongodb://user:changeme@staff.mongohq.com:10079/turf', function(err) {
-    if (err) throw err;
-});
-
-var Schema = mongoose.Schema
-  , ObjectId = Schema.ObjectId;
-
-
-var Faction = new Schema({
-    name        : String
-  , sponsor     : {
-        name      : String
-      , url       : String 
-    }
-  , members     : [User]
-});
-
-var User = new Schema({
-    name        : { type: String, unique: true }
-  , xp          : Number
-  , faction     : String
-  , created     : Date
-  , tags        : [Point]
-});
-
-var Point = new Schema({
-    user      : String
-  , faction   : { type: String, default: ""}
-  , loc       : [{type: Number},{type: Number}]
-  , created   : { type: Date, default: Date.now}
-});
-
-
-Point.methods.findPointsNear = function findPointsNear (cb) {
-  return this.find({}, cb);
-}
-
-var Tag = mongoose.model('testNew', Point);
-
-var userTag = new Tag();
-userTag.user = "new mongoose tests";
-userTag.save(function(err){if (err) throw err;})
 
 
 
