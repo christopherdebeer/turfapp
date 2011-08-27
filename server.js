@@ -8,7 +8,7 @@ require('nko')('4mmjIcGPANGpqTsG');
 
 
 var express = require('express')
-    ,mongoose = require('mongoose');
+    ,mongoose = require('mongoose')
     ,everyauth = require ('everyauth');
 
 
