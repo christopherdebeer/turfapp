@@ -142,10 +142,10 @@ userTag.save(function(err){if (err) throw err;})
 app.get('/', function(req, res){
 
   
-
+  eaUser = req.user || {};
   options = {
     title: "Turf",
-    user: req.user,
+    user: eaUser,
     tags: {}
   }
 
