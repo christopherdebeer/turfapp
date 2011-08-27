@@ -37,7 +37,7 @@ app.configure('production', function(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-mongoose.connect('mongodb://user:changeme@staff.mongohq.com:10079/turf ', function(err) {
+mongoose.connect('mongodb://<user>:<password>@staff.mongohq.com:10079/turf ', function(err) {
     if (err) throw err;
 });
 
@@ -56,6 +56,12 @@ var Tag = mongoose.model('test', Point);
 
 
 
+var userTag = new Tag();
+userTag.user = "christopherdbNew";
+userTag.save(function(err){if (err) throw err;})
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// Routes //////////////////////////////////////////////////////
@@ -65,9 +71,18 @@ var Tag = mongoose.model('test', Point);
 
 // Homepage //  main app
 app.get('/', function(req, res){
-  res.render('index', {
-    title: 'Turf'
+
+  userTag.find({}, function (err, docs) {
+  if (err) throw err;
+  else {
+    res.render('index', {
+      title: 'Turf'
+    });
+  }
   });
+
+
+  
 });
 
 // contact page
