@@ -7,10 +7,55 @@ require('nko')('4mmjIcGPANGpqTsG');
  */
 
 
+var express = require('express'),
+    mongoose = require('mongoose'),
+    everyauth = require ('everyauth'),
+    connect = require('connect');
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Everyauth/// ////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+var usersById = {};
+var usersByTwitterId = {};
+
+everyauth.everymodule
+  .findUserById( function (id, callback) {
+    callback(null, usersById[id]);
+});
+
+function addUser (source, sourceUser) {
+  var user;
+  if (arguments.length === 1) { // password-based
+    user = sourceUser = source;
+    user.id = ++nextUserId;
+    return usersById[nextUserId] = user;
+  } else { // non-password-based
+    user = usersById[++nextUserId] = {id: nextUserId};
+    user[source] = sourceUser;
+  }
+  return user;
+}
+
+everyauth.twitter
+  .consumerKey('AXZutButmsl4Q40cLTcJmg')
+  .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
+  .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitterUserMetadata) {
+    // find or create user logic goes here
+  })
+  .redirectPath('/');
+
 var express = require('express');
-var mongoose = require('mongoose');
-
-
+   var app = express.createServer(
+       express.favicon()
+     , express.bodyParser()
+     , express.cookieParser()
+     , express.session({secret: 'mr ripley'})
+     , everyauth.middleware()
+     , express.router(routes)
+   );
 // Configuration
 var app = module.exports = express.createServer();
 
@@ -18,10 +63,16 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.bodyParser());
+  app.use(express.favicon());
+  app.use(express.cookieParser());
+  app.use(express.session({secret: 'turfappsecret'}));
+  app.use(everyauth.middleware());
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
+
+everyauth.helpExpress(app);
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
