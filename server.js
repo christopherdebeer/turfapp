@@ -189,9 +189,28 @@ app.post('/tag', function(req, res) {
   
   var tagAttempt = req.body;
   if (tagAttempt.username && tagAttempt.loc && tagAttempt.secret) {
-    res.send({result: "ok"});
+    
+
+    var newTag = new Tag();
+    newTag.username = tagAttempt.username;
+    newTag.loc      = tagAttempt.loc;
+    newTag.faction  = "None";
+    newTag.created  = "The DateTime now";
+    newTag.save(function(err){
+      if (err) {
+        res.send({ result : {
+          msg: "Error saving tag",
+          req: tagAttempt,
+          error: err
+        }});
+      } else {
+        res.send({result: "ok"});
+      }
+    });
+
+
   } else {
-    res.send({ err : {
+    res.send({ result : {
       msg: "Not good tag",
       req: tagAttempt
     }});
