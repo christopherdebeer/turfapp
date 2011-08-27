@@ -141,10 +141,23 @@ userTag.save(function(err){if (err) throw err;})
 // Homepage //  main app
 app.get('/', function(req, res){
 
-    res.render('index', {
-      title: 'Turf',
-      tags: JSON.stringify(Tag.find({loc: {$near: [55,-3]}}).limit(10))
-    });
+
+  Tag.find({loc: {$near: [55,-3]}}, {limit: 10}, function (err, docs) {
+
+    if (err) {
+      res.render('index', {
+        title: 'Turf',
+        tags: "couldnt find any"
+      });
+    } else {
+      res.render('index', {
+        title: 'Turf',
+        tags: JSON.stringify(docs)
+      });
+    }
+    
+  });
+    
  
 });
 
