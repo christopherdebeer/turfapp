@@ -9,7 +9,7 @@ require('nko')('4mmjIcGPANGpqTsG');
 
 var express = require('express')
     ,mongoose = require('mongoose')
-    .everyauth = require('everyauth')
+    ,everyauth = require('everyauth')
     ,Schema = mongoose.Schema
     ,mongooseAuth = require('mongoose-auth')
 
