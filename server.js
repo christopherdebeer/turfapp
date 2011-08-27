@@ -1,41 +1,29 @@
+var http = require('http');
 
-/**
- * Module dependencies.
- */
+//
+// START NODE KNOCKOUT TRACKING CODE
+//
 
-var express = require('express');
+    //
+    // Remark: This code MUST be required ONCE somewhere in your application for,
+    // node knockout tracking to work.
+    //
+    require('./vendor/nko')('4mmjIcGPANGpqTsG', function(err, res) {
+      if (err) {
+        console.error('Error contacting Node Knockout servers:');
+        console.error(err.stack);
+      }
+    });
 
-var app = module.exports = express.createServer();
+//
+//  END NODE KNOCKOUT TRACKING CODE
+//
 
-// Configuration
 
-app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser());
-  app.use(express.session({ secret: 'your secret here' }));
-  app.use(express.compiler({ src: __dirname + '/public', enable: ['sass'] }));
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
-});
-
-app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
-});
-
-app.configure('production', function(){
-  app.use(express.errorHandler()); 
-});
-
-// Routes
-
-app.get('/', function(req, res){
-  res.render('index', {
-    title: 'Express'
-  });
-});
-
-app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+//
+// Start up an http server
+//
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.end('<h1>I\'m gonna node knock you out.</h1>');
+}).listen(8080);
