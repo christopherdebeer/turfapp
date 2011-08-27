@@ -46,8 +46,8 @@ everyauth.twitter
   .consumerKey('AXZutButmsl4Q40cLTcJmg')
   .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
   .callbackPath('/auth/twitter/callback')
-  .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitterUserMetadata) {
-    console.log("findOrCreateUser function callded", twitterUserMetadata);
+  .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitUser) {
+    console.log("findOrCreateUser function callded", twitUser);
     return usersByTwitId[twitUser.id] || (usersByTwitId[twitUser.id] = addUser('twitter', twitUser));
   })
   .redirectPath('/');
