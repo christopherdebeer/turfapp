@@ -43,13 +43,13 @@ var app = express.createServer(
      , express.cookieParser()
      , express.session({secret: 'turfappsecret'})
      , everyauth.middleware()
-     , express.router()
      , express.static(__dirname + '/public')
    );
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+  app.use(app.router);
   app.use();
 });
 
