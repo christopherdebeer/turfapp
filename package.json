@@ -13,7 +13,7 @@
   },
   "devDependencies": {},
   "engines": {
-    "node": "0.4.9"
+    "node": "0.4.11"
   },
   "author": "Christopher de Beer <christopherdebeer@gmail.com> (http://empirecollective.co.uk)",
   "description": "a geo-social warfare app",
