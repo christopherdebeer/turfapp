@@ -152,7 +152,7 @@ app.get('/', function(req, res){
   Tag.find({}, function (err, docs) {
 
     if (!err) {
-      data.tags = JSON.stringify(docs)
+      options.tags = JSON.stringify(docs);
     }
 
 
