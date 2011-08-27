@@ -92,7 +92,7 @@ function addUser (source, sourceUser) {
       id: sourceUser.id,
       name: sourceUser.name
     }
-    newUser.save(function(err){if (err) throw err;})
+    newUser.save(function(err){if (err) console.log("didnt add user due to error, most likely it existed");});
   }
   return user;
 }
