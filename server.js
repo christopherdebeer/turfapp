@@ -20,7 +20,7 @@ var express = require('express')
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Configuration
+//Configuration
 var app = module.exports = express.createServer();
 
 app.configure(function(){
@@ -33,7 +33,7 @@ app.configure(function(){
   app.use(everyauth.middleware());
   //app.use(mongooseAuth.middleware());
   app.use(express.methodOverride());
-  //app.use(app.router);
+  app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
 
