@@ -114,7 +114,7 @@ var User = new Schema({
 var Point = new Schema({
     user      : String
   , faction   : String
-  , loc       : [];
+  , loc       : [{type: Number},{type: Number}]
   , created   : Date
 });
 
