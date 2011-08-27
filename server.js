@@ -141,9 +141,9 @@ userTag.save(function(err){if (err) throw err;})
 // Homepage //  main app
 app.get('/', function(req, res){
 
-  console.log(req.user);
+  
 
-  data = {
+  options = {
     title: "Turf",
     user: req.user,
     tags: {}
@@ -155,7 +155,9 @@ app.get('/', function(req, res){
       data.tags = JSON.stringify(docs)
     }
 
-    res.render('index', data);
+
+    console.log("Template options: ", options);
+    res.render('index', options);
     
   });
     
