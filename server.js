@@ -142,7 +142,7 @@ userTag.save(function(err){if (err) throw err;})
 app.get('/', function(req, res){
 
     res.render('index', {
-      title: 'Turf'
+      title: 'Turf',
       tags: JSON.stringify(Tag.find({loc: {$near: [55,-3]}})).limit(10)
     });
  
