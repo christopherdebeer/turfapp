@@ -142,7 +142,7 @@ userTag.save(function(err){if (err) throw err;})
 app.get('/', function(req, res){
 
 
-  Tag.find({loc: {$near: [55,-3]}}, {limit: 10}, function (err, docs) {
+  Tag.find({}, function (err, docs) {
 
     if (err) {
       res.render('index', {
