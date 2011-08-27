@@ -189,7 +189,7 @@ app.post('/tag', function(req, res) {
   
   var tagAttempt = req.body;
   if (tagAttempt.username && tagAttempt.loc && tagAttempt.secret) {
-    
+    res.send({result: "ok"});
   } else {
     res.send({ err : {
       msg: "Not good tag",
