@@ -35,8 +35,8 @@ var Faction = new Schema({
 });
 
 var Person = new Schema({
-    id          : String
-  , name        : { type: String, unique: true }
+    id          : { type: String, unique: true }
+  , name        : String
   , xp          : Number
   , faction     : String
   , created     : Date
@@ -57,11 +57,6 @@ Point.methods.findPointsNear = function findPointsNear (cb) {
 
 var Tag = mongoose.model('Tag', Point);
 var User = mongoose.model('User', Person);
-
-var userTag = new Tag();
-userTag.user = "new mongoose tests";
-userTag.save(function(err){if (err) throw err;})
-
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,10 +83,8 @@ function addUser (source, sourceUser) {
     user = usersById[++nextUserId] = {id: nextUserId};
     user[source] = sourceUser;
     var newUser = new User();
-    newUser = {
-      id: sourceUser.id,
-      name: sourceUser.name
-    }
+    newUser.id = sourceUser.id;
+    newUser.name = sourceUser.name;
     newUser.save(function(err){if (err) console.log("didnt add user due to error, most likely it existed");});
   }
   return user;
