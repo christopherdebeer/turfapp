@@ -112,19 +112,11 @@ app.configure('production', function(){
 
 // Homepage //  main app
 app.get('/', function(req, res){
-
-  userTag.find({}, function (err, docs) {
-  if (err) throw err;
-  else {
     res.render('index', {
       title: 'Turf'
     });
-  }
-  });
-
-
-  
 });
+
 
 // contact page
 app.get('/contact', function(req, res){
