@@ -21,24 +21,37 @@ var express = require('express')
 
 
 //Configuration
-var app = module.exports = express.createServer();
+// var app = module.exports = express.createServer();
+
+// app.configure(function(){
+//   app.set('views', __dirname + '/views');
+//   app.set('view engine', 'jade');
+//   app.use(express.bodyParser());
+//   app.use(express.favicon());
+//   app.use(express.cookieParser());
+//   app.use(express.session({secret: 'turfappsecret'}));
+//   app.use(everyauth.middleware());
+//   //app.use(mongooseAuth.middleware());
+//   app.use(express.methodOverride());
+//   app.use(app.router);
+//   app.use();
+// });
+
+var app = express.createServer(
+       express.favicon()
+     , express.bodyParser()
+     , express.cookieParser()
+     , express.session({secret: 'turfappsecret'})
+     , everyauth.middleware()
+     , express.router(routes)
+     , express.static(__dirname + '/public')
+   );
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  app.use(express.bodyParser());
-  app.use(express.favicon());
-  app.use(express.cookieParser());
-  app.use(express.session({secret: 'turfappsecret'}));
-  app.use(everyauth.middleware());
-  //app.use(mongooseAuth.middleware());
-  app.use(express.methodOverride());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
+  app.use();
 });
-
-
-
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
