@@ -28,12 +28,11 @@ h1 {
   z-index: 0; }
 
 #content {
+  background: url("/images/shadow.png") top left repeat-x transparent;
   display: block;
   width: 100%;
-  background-color: transparent;
-  border: 1px solid #000;
   position: absolute;
-  top: 60%;
+  top: 55%;
   z-index: 1; }
   #content .inner {
     margin: 20px;
