@@ -11,7 +11,7 @@
   },
   "author": "Christopher de Beer <christopherdebeer@gmail.com> (http://empirecollective.co.uk)",
   "description": "a geo-social warfare app",
-  "homepage": "turf.no.de",
+  "homepage": "http://turf.no.de",
   "repository": {
     "type": "git",
     "url": "git://github.com/nko2/nodule.git"
