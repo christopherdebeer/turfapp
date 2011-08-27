@@ -143,6 +143,7 @@ app.get('/', function(req, res){
 
     res.render('index', {
       title: 'Turf'
+      tags: JSON.stringify(Tag.find({loc: {$near: [55,-3]}})).limit(10)
     });
  
 });
