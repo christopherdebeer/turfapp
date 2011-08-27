@@ -7,32 +7,72 @@ require('nko')('4mmjIcGPANGpqTsG');
  */
 
 
-var express = require('express')
-    ,mongoose = require('mongoose')
-    ,everyauth = require('everyauth')
-    ,Schema = mongoose.Schema;
-    //,mongooseAuth = require('mongoose-auth')
-
+var express = require('express'),
+    mongoose = require('mongoose'),
+    everyauth = require ('everyauth'),
+    connect = require('connect');
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////// Config ///////////////////////////////////////////////////////////////
+/////////////////////////////////// Everyauth /// ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//Configuration
+var usersById = {};
+var usersByTwitterId = {};
+
+everyauth.everymodule
+  .findUserById( function (id, callback) {
+    callback(null, usersById[id]);
+});
+
+function addUser (source, sourceUser) {
+  var user;
+  if (arguments.length === 1) { // password-based
+    user = sourceUser = source;
+    user.id = ++nextUserId;
+    return usersById[nextUserId] = user;
+  } else { // non-password-based
+    user = usersById[++nextUserId] = {id: nextUserId};
+    user[source] = sourceUser;
+  }
+  return user;
+}
+
+everyauth.twitter
+  .consumerKey('AXZutButmsl4Q40cLTcJmg')
+  .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
+  .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitterUserMetadata) {
+    // find or create user logic goes here
+  })
+  .redirectPath('/');
+
+// var express = require('express');
+//    var app = express.createServer(
+//        express.favicon()
+//      , express.bodyParser()
+//      , express.cookieParser()
+//      , express.session({secret: 'mr ripley'})
+//      , everyauth.middleware()
+//      , express.router(routes)
+//    );
+// Configuration
 var app = module.exports = express.createServer();
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.bodyParser());
+  app.use(express.favicon());
+  app.use(express.cookieParser());
+  app.use(express.session({secret: 'turfappsecret'}));
+  app.use(everyauth.middleware());
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use(everyauth.middleware());
   app.use(express.static(__dirname + '/public'));
 });
 
+everyauth.helpExpress(app);
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
@@ -43,61 +83,31 @@ app.configure('production', function(){
 });
 
 
-// every auth setup
-
-var usersById = {};
-
-everyauth.everymodule
- .findUserById( function (id, callback) {
-   callback(null, usersById[id]);
- });
-
-everyauth.twitter
-  .entryPath('/auth/twitter')
-  .callbackPath('/auth/twitter/callback')
-  .consumerKey('AXZutButmsl4Q40cLTcJmg')
-  .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
-  .handleAuthCallbackError( function (req, res) {
-    // on denied
-  })
-  .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitterUserMetadata) {
-    // find or create user logic goes here
-  })
-  .redirectPath('/');
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// DB Mongo stuff ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// var UserSchema = new Schema({})
-//       , User;
 
-// // STEP 1: Schema Decoration and Configuration for the Routing
-// UserSchema.plugin(mongooseAuth, {
-//     // Here, we attach your User model to every module
-//     everymodule: {
-//       everyauth: {
-//           User: function () {
-//             return User;
-//           }
-//       }
-//     }
-
-//   , twitter: {
-//       everyauth: {
-//           myHostname: 'http://turf.no.de'
-//         , appId: 'AXZutButmsl4Q40cLTcJmg'
-//         , appSecret: 'S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik'
-//         , redirectPath: '/'
-//       }
-//     }
+// mongoose.connect('mongodb://user:changeme@staff.mongohq.com:10079/turf', function(err) {
+//     if (err) throw err;
 // });
 
-// mongoose.model('User', UserSchema);
+// var Schema = mongoose.Schema
+//   , ObjectId = Schema.ObjectId;
 
-// mongoose.connect('mongodb://user:changeme@staff.mongohq.com:10079/turf');
+// var Point = new Schema({
+//     user      : String
+//   , faction   : String
+//   , lat       : Number
+//   , lon       : Number
+//   , created   : Date
+// });
 
-// User = mongoose.model('User');
+// var Tag = mongoose.model('test', Point);
+
+// var userTag = new Tag();
+// userTag.user = "christopherdbNew";
+// userTag.save(function(err){if (err) throw err;})
 
 
 
@@ -110,11 +120,13 @@ everyauth.twitter
 
 // Homepage //  main app
 app.get('/', function(req, res){
+
+  userTag.find({}, function (err, docs) {
     res.render('index', {
       title: 'Turf'
     });
+ 
 });
-
 
 // contact page
 app.get('/contact', function(req, res){
@@ -169,6 +181,6 @@ app.get('/now', function(req, res){
 ///////////////////////////////////////////////// GOGOGO //////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-everyauth.helpExpress(app);
+
 app.listen(80);
-console.log("Turfapp server listening on port %d in %s mode", app.address().port, app.settings.env);
+console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
