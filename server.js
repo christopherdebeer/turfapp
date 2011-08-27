@@ -30,14 +30,14 @@ app.configure(function(){
   app.use(express.favicon());
   app.use(express.cookieParser());
   app.use(express.session({secret: 'turfappsecret'}));
-  app.use(everyauth.middleware());
+  //app.use(everyauth.middleware());
   app.use(mongooseAuth.middleware());
   app.use(express.methodOverride());
   //app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
 
-mongooseAuth.helpExpress(app);
+
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
@@ -152,6 +152,6 @@ app.get('/now', function(req, res){
 ///////////////////////////////////////////////// GOGOGO //////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+mongooseAuth.helpExpress(app);
 app.listen(80);
 console.log("Turfapp server listening on port %d in %s mode", app.address().port, app.settings.env);
