@@ -24,7 +24,7 @@ var nextUserId = 0;
 
 everyauth.everymodule
   .findUserById( function (id, callback) {
-    callback(null, usersById[id]);
+    callback(null, usersByTwitId[id]);
 });
 
 function addUser (source, sourceUser) {
