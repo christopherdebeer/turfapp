@@ -382,11 +382,11 @@ function removeTagsNear(newTag) {
                 console.log("DEEEEBUGGG!!!!! -----> oUser", oUser);
 
 
-                User.find({id: oUser}, function(err,user){
+                User.find({id: oUser}, function(err, user1){
 
                   console.log("RESULLT OF FIND on above oUser:", user);
                   var defensiveUser = dUser;
-                  var offensiveUser = user.twitter.screenName;
+                  var offensiveUser = user1.twitter.screenName;
 
                   User.find({id: defensiveUser}, function(err,user2){
 
