@@ -75,7 +75,10 @@ User.find({},function(err,docs){if(!err){usersById = docs;}})
 console.log("usersById: ", util.inspect(usersById));
 
 
-var nextUserId = usersById.length();
+var nextUserId = 0;
+User.count({},function(err,count){
+  nextUserId = count;  
+});
 
 everyauth.everymodule
   .findUserById( function (userId, callback) {
