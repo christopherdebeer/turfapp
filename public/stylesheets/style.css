@@ -56,21 +56,30 @@ h1 {
 
 #plainContent {
   margin-top: 200px;
-  margin-left: 50px; }
+  padding-left: 35px;
+  background: url("/images/shadow.png") top left repeat-x transparent; }
   #plainContent #users {
     margin: 0;
     padding: 0; }
     #plainContent #users li {
-      list-style: none;
-      margin-bottom: 20px;
-      overflow: auto; }
-      #plainContent #users li img {
-        float: left;
-        margin-right: 20px; }
-      #plainContent #users li span {
-        display: block; }
-      #plainContent #users li .faction {
-        color: #333; }
-      #plainContent #users li .since {
-        font-size: .8em;
-        color: #333; }
+      width: 440px;
+      float: left; }
+
+.user, #user {
+  display: block;
+  list-style: none;
+  margin-bottom: 20px;
+  overflow: auto; }
+  .user img, #user img {
+    float: left;
+    margin-right: 20px; }
+  .user span, #user span {
+    display: block; }
+  .user .faction, #user .faction {
+    color: #333; }
+  .user .since, #user .since {
+    font-size: .8em;
+    color: #333; }
+
+#page {
+  background: url("/images/fake-map.jpg") top left transparent no-repeat; }

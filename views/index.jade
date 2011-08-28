@@ -11,19 +11,24 @@ h1
 
 			- if (user)
 				#user
-					p Welcome #{user.twitter.screenName}
+					img(src=user.twitter.avatarUrl)
+					span.username 
+						a(href="/user/#{user.twitter.screenName}") @#{user.twitter.screenName}
+					span.faction Faction: Independant 
+					span.since Since: #{user.created}
+				p
 					a#twLogout(href="/bye") Log Out
 			- else
 				p
 					a#twSignin(href="/auth/twitter") Login with twitter
-
-			ul#links
-				li 
-					a(href="/about") About
-					a(href="/contact") Contact
 		#rightCol
+		p
+			a(href="/about") About
+			a(href="/contact") Contact
 		p 
 			a(href='/users/') View all users
+		p
+			
 			
 script(src='https://raw.github.com/christopherdebeer/ConvexHull/master/convex_hull.js')
 script(src='/javascripts/turf.js')

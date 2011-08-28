@@ -68,28 +68,39 @@ h1 {
 
 #plainContent {
 	margin-top: 200px;
-	margin-left: 50px;
+	padding-left: 35px;
+	background: url("/images/shadow.png") top left repeat-x transparent;
 	#users {
 		margin:0;
 		padding:0;
 		li {
-			list-style: none;
-			margin-bottom: 20px;
-	    	overflow: auto;
-			img {
-				float:left;
-				margin-right: 20px;
-			}
-			span {
-				display: block;
-			}
-			.faction {
-				color: #333;
-			}
-			.since {
-				font-size: .8em;
-				color: #333;
-			}
+			width: 440px;
+			float: left;
 		}
 	}
+}
+
+.user, #user {
+	display: block;
+	list-style: none;
+	margin-bottom: 20px;
+	overflow: auto;
+	img {
+		float:left;
+		margin-right: 20px;
+	}
+	span {
+		display: block;
+	}
+	.faction {
+		color: #333;
+	}
+	.since {
+		font-size: .8em;
+		color: #333;
+	}
+}
+
+#page {
+	background: url("/images/fake-map.jpg") top left transparent no-repeat;
 }
