@@ -159,7 +159,7 @@ app.get('/', function(req, res){
     }
 
 
-    console.log("Template options: ", options);
+    // console.log("Template options: ", options);
     res.render('index', options);
     
   });
