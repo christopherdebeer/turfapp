@@ -76,7 +76,9 @@ h1 {
 		img {
 			float:left;
 		}
-		.username {}
+		.username, .since {
+			display: block;
+		}
 		.since {
 			font-size: .8em;
 			color: #333;

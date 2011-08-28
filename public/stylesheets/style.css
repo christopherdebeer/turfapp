@@ -62,6 +62,8 @@ h1 {
     list-style: none; }
     #users li img {
       float: left; }
+    #users li .username, #users li .since {
+      display: block; }
     #users li .since {
       font-size: .8em;
       color: #333; }
