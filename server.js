@@ -34,8 +34,8 @@ var oauthConsumer = new OAuth(
     "AXZutButmsl4Q40cLTcJmg",  "S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik", 
     "1.0", null, "HMAC-SHA1");
 var twitterClient = tweasy.init(oauthConsumer, {
-  access_token : "352298455-QYFJa3jmZ1Pnexk5koZyoQqZzGfEYVSXJC0sWHwL",
-  access_token_secret : "sQH3cLz6zgSrFbfxpxTzniCFMEBXEh78VQzI700"
+  access_token : "352298455-hb5nspG2pFqCD7OQO8fLRgdcQSMB1U97PbPhkEg6",
+  access_token_secret : "1Gu3M0MXdjRPpDvdVHFb3Yuu5ACu6J8vvyYyuV8I"
 });
 
 
