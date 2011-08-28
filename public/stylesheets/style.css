@@ -72,7 +72,8 @@ h1 {
   background: url("/images/shadow.png") top left repeat-x transparent; }
   #plainContent .inner {
     background-color: #fff;
-    padding-left: 35px; }
+    padding-left: 35px;
+    overflow: auto; }
   #plainContent #users {
     margin: 0;
     padding: 0; }
