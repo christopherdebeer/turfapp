@@ -373,12 +373,18 @@ function removeTagsNear(newTag) {
             Tag.remove({_id: tag._id}, function (err) {              
               if (err) {console.log("Error removing tag: ", tag)}
               else {
+
+                o1 = newTag.user;
+                d1 = tag.user;
+
+
                 console.log("Removed a tag belonging to user: ", tag.user);
-                User.find({id: newTag.user}, function(err,user){
-                  var defensiveUser = tag.user;
-                  var offensiveUser = user.screenName;
+
+                User.find({id: o1}, function(err,user){
+                  var defensiveUser = d1;
+                  var offensiveUser = user.twitter.screenName;
                   User.find({id: defensiveUser}, function(err,user){
-                    var action = "@"+ offensiveUser + "just claimed some of @" + user.screenName + " 's turf as their own.";
+                    var action = "@"+ offensiveUser + " just claimed some of @" + user.twitter.screenName + " 's turf as their own.";
                     twitterClient.updateStatus(action, 
                     function(er, resp){
                       if (!er) {
