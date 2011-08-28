@@ -176,9 +176,9 @@ app.get('/', function(req, res){
   }
 
   if (req.user) {
-    options.user = req.user;
+    options.user = JSON.stringify(req.user);
   } else {
-    options.user = {};
+    options.user = "{}";
   }
 
   Tag.find({}, function (err, docs) {
