@@ -10,8 +10,22 @@ require('nko')('4mmjIcGPANGpqTsG');
 var express   = require('express'),
     mongoose  = require('mongoose'),
     everyauth = require ('everyauth'),
-    connect   = require('connect')
-    util      = require('util');
+    connect   = require('connect'),
+    util      = require('util'),
+    TwBot     = require('twbot').TwBot;
+
+
+
+//twitter bot -turfappbot
+
+var bot = new TwBot({
+"consumerKey":"AXZutButmsl4Q40cLTcJmg",
+"consumerSecret":"S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik",
+"accessKey":"352298455-QYFJa3jmZ1Pnexk5koZyoQqZzGfEYVSXJC0sWHwL",
+"accessSecret":"sQH3cLz6zgSrFbfxpxTzniCFMEBXEh78VQzI700"});
+
+
+bot.update("@TurfApp this is @TurfappBot checking in...");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// DB Mongo stuff ////////////////////////////////////////////////////////////
