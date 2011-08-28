@@ -323,12 +323,14 @@ function removeTagsNear(loc) {
       console.log("there were tags near that tagAttempt, removing them", tags);
 
       tags.map(function(tag){
-          Tag.remove({_id: tag._id}, function (err) {              
-            if (err) {console.log("Error removing tag: ", tag)}
-            else {
-              console.log("Removed a tag belonging to user: ", tag.user);
-            }
-          })
+          if (req.user.id != tag.user) {
+            Tag.remove({_id: tag._id}, function (err) {              
+              if (err) {console.log("Error removing tag: ", tag)}
+              else {
+                console.log("Removed a tag belonging to user: ", tag.user);
+              }
+            });
+          }
       });
 
     }
