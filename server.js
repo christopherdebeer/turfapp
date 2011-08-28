@@ -42,7 +42,9 @@ var twitterClient = tweasy.init(oauthConsumer, {
 twitterClient.updateStatus("@TurfApp , this is @TurfappBot checking in.", 
   function(er, resp){
     if (!er) {
-      sys.puts("Tweeted checking in, with @TurfApp")
+      sys.puts("Tweeted checking in, with @TurfApp");
+    } else {
+      console.log("TwitBot error:", er);
     }
   });
 
