@@ -10,8 +10,8 @@ h1
 
 			- if (user.twitter)
 				#user
-					img(src=#{user.twitter.avatarUrl})
 					p Welcome #{user.twitter.name}
+					a#twLogout(href="/bye") Log Out
 			- else
 				p
 					a#twSignin(href="/auth/twitter") Login with twitter
