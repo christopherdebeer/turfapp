@@ -175,6 +175,12 @@ app.get('/', function(req, res){
     tags: {}
   }
 
+  if (req.user) {
+    options.user = req.user;
+  } else {
+    options.user = {};
+  }
+
   Tag.find({}, function (err, docs) {
 
     if (!err) {
