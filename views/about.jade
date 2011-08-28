@@ -2,7 +2,7 @@
 	h1
 		a(href='/') Turf
 	#plainContent
-		.inner
+		.inner(style='padding-right: 50px;')
 			h2 About turf
 			p 
 				strong Turf is a geo-social warfare app, where you stake a claim to your territory, and fend off those that try claim it for themselves.
@@ -10,6 +10,7 @@
 			h3 What is <em>Does</em> do
 			p As of 45 minutes to the Node Knockout finish time, turf, lets users sign up using twitter, and allows them to tag their current location using a compatible device (that supports geolocation). 
 			p When a user claims an area as their own, it removes all previous claims within a certain radius. (0.002 as far as MongoDB maxDistance is concerned, but roughly 100 meters to us mere humans)
+			p The users areas or "turf" is marked <span style="color: blue;">blue</span>, while competing users turf are all <span style="color: red;">red</span>.
 			h3 If only
 			p At the time of having to decide what to leave out so that the app was actually functional at dealine time, the following was left out - to my great dismay:
 			ul
