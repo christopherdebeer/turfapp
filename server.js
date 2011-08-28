@@ -97,7 +97,7 @@ everyauth.twitter
   .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
   .callbackPath('/auth/twitter/callback')
   .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitUser) {
-    console.log("findOrCreateUser function callded", twitUser);
+    console.log("findOrCreateUser function callded");
     return usersById[twitUser.id] || (usersById[twitUser.id] = addUser('twitter', twitUser));
   })
   .redirectPath('/');
@@ -157,8 +157,6 @@ app.get('/', function(req, res){
     if (!err) {
       options.tags = JSON.stringify(docs);
     }
-
-
     // console.log("Template options: ", options);
     res.render('index', options);
     
