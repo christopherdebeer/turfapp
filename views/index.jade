@@ -5,10 +5,7 @@ h1
 	.inner
 		#leftCol
 			h2 Welcome to turf
-			iframe(src="http://nodeknockout.com/iframe/nodule", frameborder="0", scrolling="no", allowtransparency="true", width="115", height="25")
-			p Turf is a geo-social warfare app, where you stake a claim to your territory, and fend off those that try claim it for themselves.
-
-
+			iframe#nko(src="http://nodeknockout.com/iframe/nodule", frameborder="0", scrolling="no", allowtransparency="true", width="115", height="25")
 			- if (user)
 				#user
 					img(src=user.twitter.avatarUrl)
@@ -21,6 +18,7 @@ h1
 			- else
 				p
 					a#twSignin(href="/auth/twitter") Login with twitter
+			p Turf is a geo-social warfare app, where you stake a claim to your territory, and fend off those that try claim it for themselves.
 		#rightCol
 			p
 				a#tagButton Claim your current location
@@ -28,7 +26,9 @@ h1
 				a(href="/about") About
 				a(href="/contact") Contact 
 				a(href='/users/') View all users
-			p Wow, 48 hours isn't nearly enough, especially for a designer thats just learning Node. There are many features which I would have loved to have added, but sadly will have to wait till after Node Knockout.
+			#disclaimer
+				p Wow, 48 hours isn't nearly enough, especially for a designer thats just learning Node. There are many features which I would have loved to have added, but sadly will have to wait till after Node Knockout.
+				p Colofon: ... coming soon
 			
 
 script(src='https://raw.github.com/christopherdebeer/ConvexHull/master/convex_hull.js')

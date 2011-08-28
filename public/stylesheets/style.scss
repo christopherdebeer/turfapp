@@ -53,6 +53,7 @@ h1 {
 		    margin-left: 50px;
 		    padding-top: 20px;
 		    overflow: auto;
+		    padding-right: 70px;
 			p {
 				overflow: auto;
 				margin: 0 0 20px;
@@ -96,6 +97,17 @@ h1 {
 	border: 0 none;
 }
 
+#nko {
+	left: 251px;
+    position: absolute;
+    top: 58px;
+}
+
+
+#disclaimer {
+	font-size: 0.8em;
+	color:#333;
+}
 #plainContent {
 	.inner {
 		background-color: #fff;
