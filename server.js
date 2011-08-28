@@ -169,7 +169,7 @@ app.configure('production', function(){
 // Homepage //  main app
 app.get('/', function(req, res){
 
-  console.log("reg user:", req.user);
+  console.log("req.user: ", req.user);
 
   options = {
     title: "Turf",

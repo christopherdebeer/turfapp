@@ -8,7 +8,7 @@ h1
 			p Turf is a geo-social warfare app, where you stake a claim to your territory, and fend off those that try claim it for themselves.
 
 
-			- if (user.twitter)
+			- if (user)
 				#user
 					p Welcome #{user.twitter.name}
 					a#twLogout(href="/bye") Log Out
