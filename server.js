@@ -43,14 +43,14 @@ var Person = new Schema({
     , name        : String
     , avatarUrl   : String
   }  
-  , xp          : Number
-  , faction     : String
+  , xp          : { type: Number, default: 0}
   , created     : { type: Date, default: Date.now}
   , tags        : [Point]
 });
 
 var Point = new Schema({
-    user      : String
+    userId    : String
+  , user      : String
   , faction   : { type: String, default: ""}
   , loc       : [{type: Number},{type: Number}]
   , created   : { type: Date, default: Date.now}
@@ -58,7 +58,11 @@ var Point = new Schema({
 
 
 Point.methods.findPointsNear = function findPointsNear (cb) {
-  return this.find({}, cb);
+  return this.find({tags : {userId: this.id}}, cb);
+}
+
+Person.methods.getPoints = function getPoints(cb) {
+  return this.find
 }
 
 var Tag = mongoose.model('Tag', Point);
@@ -84,7 +88,7 @@ everyauth.everymodule
   .findUserById( function (userId, callback) {
     // tryign to find a fucking user
     console.log("Everyauth findUser by id... : ", util.inspect(userId))
-    User.find({id: userId}, callback);
+    User.find({twitter: {id: userId} }, callback);
 });
 
 function addUser (source, sourceUser) {
