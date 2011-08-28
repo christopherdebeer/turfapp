@@ -55,9 +55,12 @@ h1 {
   border: 0 none; }
 
 #plainContent {
-  margin-top: 200px;
-  padding-left: 35px;
+  margin-top: 128px;
+  padding-top: 20px;
   background: url("/images/shadow.png") top left repeat-x transparent; }
+  #plainContent .inner {
+    background-color: #fff;
+    padding-left: 35px; }
   #plainContent #users {
     margin: 0;
     padding: 0; }
@@ -82,4 +85,6 @@ h1 {
     color: #333; }
 
 #page {
-  background: url("/images/fake-map.jpg") top left transparent no-repeat; }
+  background: url("/images/fake-map.jpg") top left transparent no-repeat;
+  display: block;
+  overflow: auto; }

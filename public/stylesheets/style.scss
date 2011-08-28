@@ -67,8 +67,12 @@ h1 {
 }
 
 #plainContent {
-	margin-top: 200px;
-	padding-left: 35px;
+	.inner {
+		background-color: #fff;
+		padding-left: 35px;
+	}
+	margin-top: 128px;	
+	padding-top: 20px;
 	background: url("/images/shadow.png") top left repeat-x transparent;
 	#users {
 		margin:0;
@@ -103,4 +107,6 @@ h1 {
 
 #page {
 	background: url("/images/fake-map.jpg") top left transparent no-repeat;
+	display: block;
+    overflow: auto;
 }

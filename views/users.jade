@@ -1,14 +1,15 @@
 #page
-	h1
-		a(href='/') #{title}
-	#plainContent
-		h2 These are our users
-		ul#users
-			- for user in users
-				li.user 
-					img(src=user.twitter.avatarUrl)
-					span.username 
-						a(href="/user/#{user.twitter.screenName}") @#{user.twitter.screenName}
-					span.faction Faction: Independant 
-					span.since Since: #{user.created}
+	.inner
+		h1
+			a(href='/') #{title}
+		#plainContent
+			h2 These are our users
+			ul#users
+				- for user in users
+					li.user 
+						img(src=user.twitter.avatarUrl)
+						span.username 
+							a(href="/user/#{user.twitter.screenName}") @#{user.twitter.screenName}
+						span.faction Faction: Independant 
+						span.since Since: #{user.created}
 
