@@ -89,11 +89,11 @@ everyauth.everymodule
     // tryign to find a fucking user
     console.log("Everyauth findUser by id... : ", util.inspect(userId));
     console.log("Everyauth findUser callback... : ",callback, util.inspect(callback))
-    User.find(  }, function(err, user){
+    User.find({id: userId}, function(err, user){
       if (err) console.log("error",err);
       if (user) console.log("user", user);
     });
-    User.find({twitter.id: userId}, callback);
+    User.find({id: userId}, callback);
 });
 
 function addUser (source, sourceUser) {
@@ -109,7 +109,7 @@ function addUser (source, sourceUser) {
     user  = {id: sourceUser.id};
     user[source] = sourceUser;
     var newUser = new User();
-    newUser.id = nextUserId;
+    newUser.id = sourceUser.id;
     newUser.twitter.id = sourceUser.id;
     newUser.twitter.name = sourceUser.name;
     newUser.twitter.avatarUrl = sourceUser.profile_image_url;
