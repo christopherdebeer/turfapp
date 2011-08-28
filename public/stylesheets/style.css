@@ -53,3 +53,15 @@ h1 {
   height: 43px;
   width: 250px;
   border: 0 none; }
+
+#users {
+  margin-top: 200px;
+  margin-left: 50px;
+  padding: 0; }
+  #users li {
+    list-style: none; }
+    #users li img {
+      float: left; }
+    #users li .since {
+      font-size: .8em;
+      color: #333; }
