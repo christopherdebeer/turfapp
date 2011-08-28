@@ -93,7 +93,7 @@ everyauth.everymodule
       if (err) console.log("error",err);
       if (user) console.log("user", user);
     });
-    User.find({twitter.id: userId} }, callback);
+    User.find({twitter.id: userId}, callback);
 });
 
 function addUser (source, sourceUser) {
