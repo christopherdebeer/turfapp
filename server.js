@@ -158,7 +158,7 @@ app.get('/', function(req, res){
     if (!err) {
       options.tags = JSON.stringify(docs);
     }
-    // console.log("Template options: ", options);
+    console.log("Template options: ", options);
     res.render('index', options);
     
   });
