@@ -288,7 +288,18 @@ app.post('/tag', function(req, res) {
       
       if (err) {console.log("there was an error looking for neaby tags.", err);}
       else {
-        console.log("there were tags near that tagAttempt", tags);
+        console.log("there were tags near that tagAttempt, removing them", tags);
+
+        tags.map(function(tag){
+            Tag.remove({_id: tag._id}, function (err) {
+              
+              if (err) {}
+              else {
+                console.log("Removed a tag belonging to user,", tag.user);
+              }
+            })
+        });
+
         msg = tags;
       }
 
