@@ -7,7 +7,8 @@
     "jade": ">= 0.0.1",
     "nko": "~0.1.0",
     "everyauth": "0.2.18",
-    "tweasy": "0.1.2"
+    "tweasy": "0.1.2",
+    "oauth": "0.9.5"
   },
   "author": "Christopher de Beer <christopherdebeer@gmail.com> (http://empirecollective.co.uk)",
   "description": "a geo-social warfare app",
