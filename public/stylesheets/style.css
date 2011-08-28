@@ -73,7 +73,8 @@ h1 {
   #plainContent .inner {
     background-color: #fff;
     padding-left: 35px;
-    overflow: auto; }
+    overflow: auto;
+    margin-top: 20px; }
   #plainContent #users {
     margin: 0;
     padding: 0; }
