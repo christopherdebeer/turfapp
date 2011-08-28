@@ -72,7 +72,9 @@ var nextUserId = 0;
 
 everyauth.everymodule
   .findUserById( function (userId, callback) {
-   User.find({id: userId}, callback);
+    // tryign to find a fucking user
+    console.log("Everyauth findUser by id... : ", util.inspect(userId))
+    User.find({id: userId}, callback);
 });
 
 function addUser (source, sourceUser) {
