@@ -189,7 +189,7 @@ app.get('/', function(req, res){
     options.userObj = JSON.stringify(req.user);
 
 
-    Tag.find({user: req.user.twitter.id}, function (err, docs) {
+    Tag.find({}, function (err, docs) {
 
       if (!err) {
         options.tags = JSON.stringify(docs);

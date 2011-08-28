@@ -44,12 +44,12 @@ var turf = {
 	getLatLonFromPosition: function (position) {
 		return [position.coords.latitude, position.coords.longitude];
 	},
-	createCircle: function (latlon,rad) {
+	createCircle: function (color,latlon,rad) {
 		var circleOptions = {
-			strokeColor: "#FF0000",
+			strokeColor: color,
 			strokeOpacity: 0.8,
 			strokeWeight: 2,
-			fillColor: "#FF0000",
+			fillColor: color,
 			fillOpacity: 0.35,
 			map: turf.map,
 			center: latlon,
@@ -105,10 +105,16 @@ $(document).ready( function () {
 	turf.initMap(turf.locations.edinburgh);
 
 	$(turf.points).each( function (i,e) {
-		console.log(i,e);
-		var tmp = new google.maps.LatLng (e.loc[0], e.loc[1]);
-		turf.createCircle(tmp,100);
-		turf.tags.push(tmp);
+		// console.log(i,e);
+		if (e.user === turf.user.id) {
+			var tmp = new google.maps.LatLng (e.loc[0], e.loc[1]);
+			turf.createCircle("blue",tmp,100);
+			turf.tags.push(tmp);
+		} else {
+			var tmp = new google.maps.LatLng (e.loc[0], e.loc[1]);
+			turf.createCircle("red",tmp,100);
+			turf.tags.push(tmp);
+		}
 	});
 
 	if (turf.user) {
