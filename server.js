@@ -39,7 +39,7 @@ var Person = new Schema({
     id          : { type: String, unique: true }
   , faction     : String
   , twitter     : {
-    , id          : String
+      id          : String
     , name        : String
     , avatarUrl   : String
   }  
