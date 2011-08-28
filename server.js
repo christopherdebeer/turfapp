@@ -121,11 +121,14 @@ everyauth.twitter
   .consumerKey('AXZutButmsl4Q40cLTcJmg')
   .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
   .callbackPath('/auth/twitter/callback')
-  everyauth.everymodule.logoutPath('/bye');
   .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitUser) {
     return usersById[twitUser.id] || (usersById[twitUser.id] = addUser('twitter', twitUser));
   })
   .redirectPath('/');
+
+everyauth.everymodule.logoutPath('/bye');
+
+
 
 
 
