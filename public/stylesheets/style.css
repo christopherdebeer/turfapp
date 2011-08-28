@@ -42,21 +42,24 @@ h1 {
       display: inline;
       float: left; }
     #content .inner #rightCol {
-      width: 300px;
+      width: 450px;
       display: inline;
-      float: left;
+      float: right;
       overflow: auto; }
       #content .inner #rightCol p {
         margin: 0;
         overflow: auto; }
         #content .inner #rightCol p a {
+          background-color: #333333;
+          color: #FFFFFF;
           display: block;
+          float: left;
           height: 20px;
-          background-color: #333;
-          color: #fff;
+          margin: 10px;
+          padding: 10px;
           text-align: center;
-          width: 200px;
-          float: left; }
+          text-decoration: none;
+          width: 200px; }
 
 #twSignin {
   display: block;
