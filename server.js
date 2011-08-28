@@ -111,7 +111,7 @@ function addUser (source, sourceUser) {
     newUser.save(function(err){
       if (err) {console.log("didnt add user due to error, most likely it existed");}
       else {
-        usersById.push(newUser);
+        usersById.push(newUser); 
       }
     });
   }
