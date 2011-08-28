@@ -44,7 +44,19 @@ h1 {
     #content .inner #rightCol {
       width: 300px;
       display: inline;
-      float: left; }
+      float: left;
+      overflow: auto; }
+      #content .inner #rightCol p {
+        margin: 0;
+        overflow: auto; }
+        #content .inner #rightCol p a {
+          display: block;
+          height: 20px;
+          background-color: #333;
+          color: #fff;
+          text-align: center;
+          width: 200px;
+          float: left; }
 
 #twSignin {
   display: block;

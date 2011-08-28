@@ -51,6 +51,20 @@ h1 {
 			width:300px;
 			display: inline;
 			float: left;
+			overflow: auto;
+			p {
+				margin:0;
+				overflow: auto;
+				a {
+					display: block;
+					height: 20px;
+					background-color: #333;
+					color: #fff;
+					text-align: center;
+					width: 200px;
+					float: left;
+				}
+			}
 		}
 
 	}
