@@ -38,11 +38,14 @@ var Faction = new Schema({
 var Person = new Schema({
     id          : { type: String, unique: true }
   , faction     : String
-  , name        : String
-  , avatarUrl   : String
+  , twitter     : {
+    , id          : String
+    , name        : String
+    , avatarUrl   : String
+  }  
   , xp          : Number
   , faction     : String
-  , created     : Date
+  , created     : { type: Date, default: Date.now}
   , tags        : [Point]
 });
 
@@ -68,7 +71,11 @@ var User = mongoose.model('User', Person);
 
 //ryauth.debug = true;
 var usersById = {};
-var nextUserId = 0;
+User.find({},function(err,docs){if(!err){usersById = docs;}})
+console.log("usersById: ", util.inspect(usersById));
+
+
+var nextUserId = usersById.length();
 
 everyauth.everymodule
   .findUserById( function (userId, callback) {
@@ -88,10 +95,16 @@ function addUser (source, sourceUser) {
     user = usersById[++nextUserId] = {id: nextUserId};
     user[source] = sourceUser;
     var newUser = new User();
-    newUser.id = sourceUser.id;
-    newUser.name = sourceUser.name;
-    newUser.avatarUrl = sourceUser.profile_image_url;
-    newUser.save(function(err){if (err) console.log("didnt add user due to error, most likely it existed");});
+    newUser.id = nextUserId;
+    newUser.twitter.id = sourceUser.id;
+    newUser.twitter.name = sourceUser.name;
+    newUser.twitter.avatarUrl = sourceUser.profile_image_url;
+
+    newUser.save(function(err){
+      if (err) {console.log("didnt add user due to error, most likely it existed");}
+      else {
+        usersById.push(newUser)
+      });
   }
   return user;
 }
