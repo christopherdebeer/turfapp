@@ -113,7 +113,7 @@ var turf = {
 			turf.createCircle("blue",latLng,100)
 			if (window.console) { console.log("tag created at location:", latLng); }
 			turf.tags.push(latLng);
-			window.location = window.location;
+			window.location = window.location.href;
 			// var newHull = turf.getConvexHullPoints(turf.tags);
 			// turf.createPolygon(newHull);
 		  }
