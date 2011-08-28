@@ -111,12 +111,12 @@ $(document).ready( function () {
 		turf.tags.push(tmp);
 	});
 
-	if (turf.userObj) {
+	if (turf.user) {
 		google.maps.event.addListener(turf.map, 'click', function(event) {
 		
 			// ?Na=" + event.latLng.P.Na.toString() + "&Oa=" + event.latLng.P.Oa.toString()
 			var tag = {
-				username: turf.userObj.id,
+				username: turf.user.id,
 				loc : [event.latLng.lat(), event.latLng.lng()],
 				secret: "secretString"
 			}
