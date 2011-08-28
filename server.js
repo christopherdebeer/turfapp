@@ -87,12 +87,12 @@ User.count({},function(err,count){
 everyauth.everymodule
   .findUserById( function (userId, callback) {
     // tryign to find a fucking user
-    console.log("Everyauth findUser by id... : ", util.inspect(userId));
-    console.log("Everyauth findUser callback... : ",callback, util.inspect(callback))
-    User.find({id: userId}, function(err, user){
-      if (err) console.log("error",err);
-      if (user) console.log("user", user);
-    });
+    // console.log("Everyauth findUser by id... : ", util.inspect(userId));
+    // console.log("Everyauth findUser callback... : ",callback, util.inspect(callback))
+    // User.find({id: userId}, function(err, user){
+    //   if (err) console.log("error",err);
+    //   if (user) console.log("user", user);
+    // });
     User.find({id: userId}, callback);
 });
 
@@ -129,7 +129,6 @@ everyauth.twitter
   .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
   .callbackPath('/auth/twitter/callback')
   .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitUser) {
-    console.log(util.inspect(usersById));
     return usersById[twitUser.id] || (usersById[twitUser.id] = addUser('twitter', twitUser));
   })
   .redirectPath('/');
@@ -175,6 +174,8 @@ app.configure('production', function(){
 
 // Homepage //  main app
 app.get('/', function(req, res){
+
+  console.log("reg user:", req.user)
 
   options = {
     title: "Turf",
