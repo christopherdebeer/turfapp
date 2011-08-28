@@ -177,7 +177,7 @@ app.get('/', function(req, res){
   options = {
     title: "Turf",
     tags: {},
-    userObj: JSON.stringify(req.user);
+    userObj: JSON.stringify(req.user)
   }
 
   if (req.user) {
