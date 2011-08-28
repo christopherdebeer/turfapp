@@ -377,31 +377,31 @@ function removeTagsNear(newTag) {
               else {
 
                 console.log("Removed a tag belonging to user: ", tag.user);
-                var dUser = tag.user;
-                var oUser = newTag.user;
-                console.log("DEEEEBUGGG!!!!! -----> oUser", oUser);
+                // var dUser = tag.user;
+                // var oUser = newTag.user;
+                // console.log("DEEEEBUGGG!!!!! -----> oUser", oUser);
 
 
-                User.find({id: oUser}, function(err, userA){
+                // User.find({id: oUser}, function(err, userA){
 
-                  var offensiveUser = userA.twitter.screenName;
-                  console.log("RESULLT OF FIND on above oUser:", offensiveUser);
-                  var defensiveUser = dUser;
+                //   var offensiveUser = userA.twitter.screenName;
+                //   console.log("RESULLT OF FIND on above oUser:", offensiveUser);
+                //   var defensiveUser = dUser;
                   
 
-                  User.find({id: defensiveUser}, function(err, userB){
+                //   User.find({id: defensiveUser}, function(err, userB){
 
-                    var action = "@"+ offensiveUser + " just claimed some of @" + userB.twitter.screenName + " 's turf as their own.";
+                //     var action = "@"+ offensiveUser + " just claimed some of @" + userB.twitter.screenName + " 's turf as their own.";
 
-                    twitterClient.updateStatus(action, function(er, resp){
-                      if (!er) {
-                        console.log("Tweeted: ", action );
-                      } else {
-                        console.log("TwitBot error:", er);
-                      }
-                    });
-                  })
-                })
+                //     twitterClient.updateStatus(action, function(er, resp){
+                //       if (!er) {
+                //         console.log("Tweeted: ", action );
+                //       } else {
+                //         console.log("TwitBot error:", er);
+                //       }
+                //     });
+                //   })
+                // })
               }
             });
           }
