@@ -129,7 +129,7 @@ $(document).ready( function () {
 
 	$(turf.points).each( function (i,e) {
 		// console.log(i,e);
-		if (e.user === turf.user.id) {
+		if (turf.user && e.user === turf.user.id) {
 			var tmp = new google.maps.LatLng (e.loc[0], e.loc[1]);
 			turf.createCircle("blue",tmp,100);
 			turf.tags.push(tmp);
