@@ -59,12 +59,16 @@ h1 {
   margin-left: 50px;
   padding: 0; }
   #users li {
-    list-style: none; }
+    list-style: none;
+    margin-bottom: 20px;
+    overflow: auto; }
     #users li img {
       float: left;
       margin-right: 20px; }
-    #users li .username, #users li .since {
+    #users li span {
       display: block; }
+    #users li .faction {
+      color: #333; }
     #users li .since {
       font-size: .8em;
       color: #333; }
