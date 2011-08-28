@@ -86,7 +86,7 @@ everyauth.everymodule
     //   if (err) console.log("error",err);
     //   if (user) console.log("user", user);
     // });
-    User.find({id: userId}, callback);
+    User.findOne({id: userId}, callback);
 });
 
 function addUser (source, sourceUser) {
