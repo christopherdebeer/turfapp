@@ -206,7 +206,16 @@ app.get('/', function(req, res){
     console.log("Non-User Viewing.");
     options.user = undefined;
     options.userObj = "undefined";
-    res.render('index', options);
+    Tag.find({}, function (err, docs) {
+
+      if (!err) {
+        options.tags = JSON.stringify(docs);
+      } else {
+        throw err;
+      }
+      res.render('index', options);
+      
+    });
   }
 
 
