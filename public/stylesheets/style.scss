@@ -46,15 +46,16 @@ h1 {
 			width: 300px;
 			display:inline;
 			float:left;
+			margin-right: 100px;
 		}
 		#rightCol {
 			display: inline;
 		    margin-left: 50px;
-		    margin-top: 103px;
+		    padding-top: 103px;
 		    overflow: auto;
 			p {
-				margin:0;
 				overflow: auto;
+				margin: 0 0 20px;
 				a {
 					background-color: #333333;
 				    color: #FFFFFF;
