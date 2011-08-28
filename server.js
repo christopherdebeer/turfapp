@@ -11,21 +11,40 @@ var express   = require('express'),
     mongoose  = require('mongoose'),
     everyauth = require ('everyauth'),
     connect   = require('connect'),
-    util      = require('util'),
-    TwBot     = require('twbot').TwBot;
+    util      = require('util');
+    //TwBot     = require('twbot').TwBot;
 
 
 
 //twitter bot -turfappbot
 
-var bot = new TwBot({
-"consumerKey":"AXZutButmsl4Q40cLTcJmg",
-"consumerSecret":"S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik",
-"accessKey":"352298455-QYFJa3jmZ1Pnexk5koZyoQqZzGfEYVSXJC0sWHwL",
-"accessSecret":"sQH3cLz6zgSrFbfxpxTzniCFMEBXEh78VQzI700"});
+// var bot = new TwBot({
+// "consumerKey":"AXZutButmsl4Q40cLTcJmg",
+// "consumerSecret":"S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik",
+// "accessKey":"352298455-QYFJa3jmZ1Pnexk5koZyoQqZzGfEYVSXJC0sWHwL",
+// "accessSecret":"sQH3cLz6zgSrFbfxpxTzniCFMEBXEh78VQzI700"});
+
+var sys = require('sys')
+  , tweasy = require("tweasy")
+  , OAuth = require("oauth").OAuth
+  ;
+var oauthConsumer = new OAuth(
+    "http://twitter.com/oauth/request_token",
+    "http://twitter.com/oauth/access_token", 
+    "AXZutButmsl4Q40cLTcJmg",  "S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik", 
+    "1.0", null, "HMAC-SHA1");
+var twitterClient = tweasy.init(oauthConsumer, {
+  access_token : "352298455-QYFJa3jmZ1Pnexk5koZyoQqZzGfEYVSXJC0sWHwL",
+  access_token_secret : "sQH3cLz6zgSrFbfxpxTzniCFMEBXEh78VQzI700"
+});
 
 
-bot.update("@TurfApp this is @TurfappBot checking in...");
+twitterClient.updateStatus("@TurfApp , this is @TurfappBot checking in.", 
+  function(er, resp){
+    if (!er) {
+      sys.puts("Tweeted checking in, with @TurfApp")
+    }
+  });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// DB Mongo stuff ////////////////////////////////////////////////////////////
