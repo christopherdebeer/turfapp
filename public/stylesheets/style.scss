@@ -51,13 +51,16 @@ h1 {
 		#rightCol {
 			display: block;
 		    margin-left: 50px;
-		    padding-top: 103px;
+		    padding-top: 20px;
 		    overflow: auto;
 			p {
 				overflow: auto;
 				margin: 0 0 20px;
 				a {
 					background-color: #333333;
+					-webkit-border-radius: 5px;
+					-moz-border-radius: 5px;
+				    border-radius: 5px;
 				    color: #FFFFFF;
 				    display: block;
 				    float: left;
@@ -68,6 +71,15 @@ h1 {
 				    text-decoration: none;
 				    width: 200px;
 				}
+			}
+			#tagButton {
+				background-color: blue;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+			    border-radius: 5px;
+			    color: white;
+			    padding: 10px 119px;
+			    width: auto;
 			}
 		}
 

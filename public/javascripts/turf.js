@@ -48,7 +48,7 @@ var turf = {
 		var circleOptions = {
 			strokeColor: color,
 			strokeOpacity: 0.8,
-			strokeWeight: 2,
+			strokeWeight: 0,
 			fillColor: color,
 			fillOpacity: 0.35,
 			map: turf.map,
