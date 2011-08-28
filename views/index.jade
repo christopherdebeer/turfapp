@@ -11,7 +11,7 @@ h1
 
 			- if (user)
 				#user
-					p Welcome #{user.twitter.name}
+					p Welcome #{user.twitter.screenName}
 					a#twLogout(href="/bye") Log Out
 			- else
 				p

@@ -42,6 +42,7 @@ var Person = new Schema({
       id          : String
     , name        : String
     , avatarUrl   : String
+    , screenName  : String
   }  
   , xp          : { type: Number, default: 0}
   , created     : { type: Date, default: Date.now}
