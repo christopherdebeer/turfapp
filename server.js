@@ -25,39 +25,50 @@ var Schema = mongoose.Schema
   , ObjectId = Schema.ObjectId;
 
 
-var Faction = new Schema({
+var FactionSchema = new Schema({
     name        : String
   , sponsor     : {
         name      : String
       , url       : String 
     }
-  , members     : [Person]
+  , created     : { type: Date, default: Date.now}
+  , users       : [UserSchema]
 });
 
-var Person = new Schema({
-    id          : { type: String, unique: true }
+var UserSchema = new Schema({
+    faction     : ObjectId
+  , id          : { type: String, unique: true }
   , name        : String
   , avatarUrl   : String
   , xp          : Number
   , faction     : String
-  , created     : Date
-  , tags        : [Point]
+  , created     : { type: Date, default: Date.now}
+  , tags        : [TagSchema]
 });
 
-var Point = new Schema({
-    user      : String
+var TagSchema = new Schema({
+    user      : ObjectId
   , faction   : { type: String, default: ""}
   , loc       : [{type: Number},{type: Number}]
   , created   : { type: Date, default: Date.now}
 });
 
 
-Point.methods.findPointsNear = function findPointsNear (cb) {
+PointSchema.methods.findPointsNear = function findPointsNear (cb) {
   return this.find({}, cb);
 }
 
-var Tag = mongoose.model('Tag', Point);
-var User = mongoose.model('User', Person);
+//var Tag = mongoose.model('Tag', Point);
+//var User = mongoose.model('User', Person);
+
+var Faction = mongoose.model('Faction', FactionSchema);
+
+
+
+var Indies = new Faction();
+Indies.name = "Independents";
+Indies.save(function(er,docs){if (err) {console.log("Didnt add Faction:",Indies.name,", due to error, most likely it existed");}})
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +81,7 @@ var nextUserId = 0;
 
 everyauth.everymodule
   .findUserById( function (id, callback) {
-   User.findById(userId, callback);
+   Faction.findById(userId, callback);
 });
 
 function addUser (source, sourceUser) {
@@ -81,13 +92,15 @@ function addUser (source, sourceUser) {
     user.id = ++nextUserId;
     return usersById[nextUserId] = user;
   } else { // non-password-based
+
+    
     user = usersById[++nextUserId] = {id: nextUserId};
     user[source] = sourceUser;
-    var newUser = new User();
-    newUser.id = sourceUser.id;
-    newUser.name = sourceUser.name;
-    newUser.avatarUrl = sourceUser.profile_image_url;
-    newUser.save(function(err){if (err) console.log("didnt add user due to error, most likely it existed");});
+    // var newUser = new User();
+    // newUser.id = sourceUser.id;
+    // newUser.name = sourceUser.name;
+    // newUser.avatarUrl = sourceUser.profile_image_url;
+    // newUser.save(function(err){if (err) {console.log("Didnt add user:",newUser.id,", due to error, most likely it existed");}});
   }
   return user;
 }
@@ -208,24 +221,24 @@ app.post('/tag', function(req, res) {
   var tagAttempt = req.body;
   if (tagAttempt.username && tagAttempt.loc && tagAttempt.secret) {
     
-
-    var newTag = new Tag();
-    newTag.user = tagAttempt.username;
-    newTag.loc      = tagAttempt.loc;
+    // Indies.users.$where('this.name === "this.lastname"').exec(callback)
+    // Indies.Users.id().Tags.push()
+    // newTag.user = tagAttempt.username;
+    // newTag.loc      = tagAttempt.loc;
     
-    // need to add faction checker
+    // // need to add faction checker
 
-    newTag.save(function(err){
-      if (err) {
-        res.send({ result : {
-          msg: "Error saving tag",
-          req: tagAttempt,
-          error: err
-        }});
-      } else {
-        res.send({result: "ok"});
-      }
-    });
+    // newTag.save(function(err){
+    //   if (err) {
+    //     res.send({ result : {
+    //       msg: "Error saving tag",
+    //       req: tagAttempt,
+    //       error: err
+    //     }});
+    //   } else {
+    //     res.send({result: "ok"});
+    //   }
+    // });
 
 
   } else {
