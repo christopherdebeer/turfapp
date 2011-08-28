@@ -7,10 +7,11 @@ require('nko')('4mmjIcGPANGpqTsG');
  */
 
 
-var express = require('express'),
-    mongoose = require('mongoose'),
+var express   = require('express'),
+    mongoose  = require('mongoose'),
     everyauth = require ('everyauth'),
-    connect = require('connect');
+    connect   = require('connect')
+    util      = require('util');
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// DB Mongo stuff ////////////////////////////////////////////////////////////
@@ -98,7 +99,7 @@ everyauth.twitter
   .consumerSecret('S3U0mPVPID8sYem46pa7VtkIMOwat5akNJn62gGik')
   .callbackPath('/auth/twitter/callback')
   .findOrCreateUser( function (session, accessToken, accessTokenSecret, twitUser) {
-    console.log("findOrCreateUser function callded");
+    console.log(util.inspect(usersById));
     return usersById[twitUser.id] || (usersById[twitUser.id] = addUser('twitter', twitUser));
   })
   .redirectPath('/');
@@ -145,11 +146,8 @@ app.configure('production', function(){
 // Homepage //  main app
 app.get('/', function(req, res){
 
-  
-  eaUser = req.user || {};
   options = {
     title: "Turf",
-    user: eaUser,
     tags: {}
   }
 
