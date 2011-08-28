@@ -261,10 +261,13 @@ app.get('/', function(req, res){
 
 // contact page
 app.get('/contact', function(req, res){
-  res.render('contact', {});
+  res.render('contact', {title: "Turf Contact"});
 });
 
-
+// about page
+app.get('/about', function(req, res){
+  res.render('about', {title: "About Turf"});
+});
 // users
 
 app.get('/users', function(req, res){
