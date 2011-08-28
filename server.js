@@ -182,21 +182,24 @@ app.get('/', function(req, res){
   if (req.user) {
     options.user = req.user;
     options.userObj = JSON.stringify(req.user);
+    Tag.find({user: re.user.twiiter.id}, function (err, docs) {
+
+      if (!err) {
+        options.tags = JSON.stringify(docs);
+      }
+      res.render('index', options);
+      
+    });
+
+
   } else {
     options.user = undefined;
     options.userObj = "undefined";
+    res.render('index', options);
   }
 
 
-  Tag.find({}, function (err, docs) {
-
-    if (!err) {
-      options.tags = JSON.stringify(docs);
-    }
-    //console.log("Template options: ", options);
-    res.render('index', options);
-    
-  });
+  
     
  
 });

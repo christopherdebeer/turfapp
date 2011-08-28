@@ -111,30 +111,32 @@ $(document).ready( function () {
 		turf.tags.push(tmp);
 	});
 
-	google.maps.event.addListener(turf.map, 'click', function(event) {
+	if (turf.userObj) {
+		google.maps.event.addListener(turf.map, 'click', function(event) {
 		
-		// ?Na=" + event.latLng.P.Na.toString() + "&Oa=" + event.latLng.P.Oa.toString()
-		var tag = {
-			username: "Testuser",
-			loc : [event.latLng.lat(), event.latLng.lng()],
-			secret: "secretString"
-		}
-		
-    	$.ajax({
-		  url: "http://turf.no.de/tag",
-		  data: tag,
-		  type: "POST",
-		  success: function () {
+			// ?Na=" + event.latLng.P.Na.toString() + "&Oa=" + event.latLng.P.Oa.toString()
+			var tag = {
+				username: turf.userObj.id,
+				loc : [event.latLng.lat(), event.latLng.lng()],
+				secret: "secretString"
+			}
+			
+	    	$.ajax({
+			  url: "http://turf.no.de/tag",
+			  data: tag,
+			  type: "POST",
+			  success: function () {
 
-			turf.createCircle(event.latLng,100)
-    		if (window.console) { console.log("tag created at location:", event.latLng); }
-    		turf.tags.push(event.latLng);
-    		// var newHull = turf.getConvexHullPoints(turf.tags);
-    		// turf.createPolygon(newHull);
-		  }
-		});
+				turf.createCircle(event.latLng,100)
+	    		if (window.console) { console.log("tag created at location:", event.latLng); }
+	    		turf.tags.push(event.latLng);
+	    		// var newHull = turf.getConvexHullPoints(turf.tags);
+	    		// turf.createPolygon(newHull);
+			  }
+			});
 
-  	});
+	  	});
+	}
 
 	if ($('html').hasClass("geolocation")) {
 		if (window.console) { console.log("Client supports geolocation."); }
