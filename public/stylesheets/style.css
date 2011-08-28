@@ -54,21 +54,23 @@ h1 {
   width: 250px;
   border: 0 none; }
 
-#users {
+#plainContent {
   margin-top: 200px;
-  margin-left: 50px;
-  padding: 0; }
-  #users li {
-    list-style: none;
-    margin-bottom: 20px;
-    overflow: auto; }
-    #users li img {
-      float: left;
-      margin-right: 20px; }
-    #users li span {
-      display: block; }
-    #users li .faction {
-      color: #333; }
-    #users li .since {
-      font-size: .8em;
-      color: #333; }
+  margin-left: 50px; }
+  #plainContent #users {
+    margin: 0;
+    padding: 0; }
+    #plainContent #users li {
+      list-style: none;
+      margin-bottom: 20px;
+      overflow: auto; }
+      #plainContent #users li img {
+        float: left;
+        margin-right: 20px; }
+      #plainContent #users li span {
+        display: block; }
+      #plainContent #users li .faction {
+        color: #333; }
+      #plainContent #users li .since {
+        font-size: .8em;
+        color: #333; }

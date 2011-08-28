@@ -1,10 +1,12 @@
 h1 #{title}
-ul#users
-	- for user in users
-		li 
-			img(src=user.twitter.avatarUrl)
-			span.username 
-				a(href="/user/#{user.twitter.screenName}") @#{user.twitter.screenName}
-			span.faction Faction: Indipentent 
-			span.since Since: #{user.created}
+#plainContent
+	h2 These are our users
+	ul#users
+		- for user in users
+			li 
+				img(src=user.twitter.avatarUrl)
+				span.username 
+					a(href="/user/#{user.twitter.screenName}") @#{user.twitter.screenName}
+				span.faction Faction: Indipentent 
+				span.since Since: #{user.created}
 

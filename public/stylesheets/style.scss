@@ -66,28 +66,30 @@ h1 {
 	border: 0 none;
 }
 
-
-#users {
+#plainContent {
 	margin-top: 200px;
 	margin-left: 50px;
-	padding:0;
-	li {
-		list-style: none;
-		margin-bottom: 20px;
-    	overflow: auto;
-		img {
-			float:left;
-			margin-right: 20px;
-		}
-		span {
-			display: block;
-		}
-		.faction {
-			color: #333;
-		}
-		.since {
-			font-size: .8em;
-			color: #333;
+	#users {
+		margin:0;
+		padding:0;
+		li {
+			list-style: none;
+			margin-bottom: 20px;
+	    	overflow: auto;
+			img {
+				float:left;
+				margin-right: 20px;
+			}
+			span {
+				display: block;
+			}
+			.faction {
+				color: #333;
+			}
+			.since {
+				font-size: .8em;
+				color: #333;
+			}
 		}
 	}
 }
