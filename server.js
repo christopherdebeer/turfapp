@@ -379,6 +379,7 @@ function removeTagsNear(newTag) {
                 console.log("Removed a tag belonging to user: ", tag.user);
                 var dUser = tag.user;
                 var oUser = newTag.user;
+                console.log("DEEEEBUGGG!!!!! -----> oUser", oUser);
 
 
                 User.find({id: oUser}, function(err,user){
@@ -390,7 +391,7 @@ function removeTagsNear(newTag) {
                   User.find({id: defensiveUser}, function(err,user2){
 
                     var action = "@"+ offensiveUser + " just claimed some of @" + user2.twitter.screenName + " 's turf as their own.";
-                    
+
                     twitterClient.updateStatus(action, 
                     function(er, resp){
                       if (!er) {
