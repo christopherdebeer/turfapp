@@ -186,7 +186,7 @@ app.get('/', function(req, res){
     options.user = req.user;
     options.userObj = JSON.stringify(req.user);
 
-    
+
     Tag.find({user: req.user.twitter.id}, function (err, docs) {
 
       if (!err) {
@@ -222,7 +222,17 @@ app.get('/contact', function(req, res){
 // users
 
 app.get('/users', function(req, res){
-  res.render('users', {});
+  User.find({}, function(err,users) {
+    
+    if (err) {
+      res.render('users', {});
+    }
+    else {
+      res.render('users', users);
+    }
+
+
+  });
 });
 
 
@@ -262,6 +272,10 @@ app.post('/tag', function(req, res) {
     newTag.loc      = tagAttempt.loc;
     
     // need to add faction checker
+
+    // check for tags near
+
+    Tag.find({})
 
     newTag.save(function(err){
       if (err) {
