@@ -59,7 +59,7 @@ var turf = {
 
 		//binding generic infowindow for now
 		google.maps.event.addListener(myCircle, 'click', function() {
-		  turf.infowindow.open(map,myCircle);
+		  turf.infowindow.open(turf.map,myCircle);
 		});
 
 
