@@ -116,7 +116,7 @@ $(document).ready( function () {
 		
 			// ?Na=" + event.latLng.P.Na.toString() + "&Oa=" + event.latLng.P.Oa.toString()
 			var tag = {
-				username: turf.user.id,
+				userId: turf.user.id,
 				loc : [event.latLng.lat(), event.latLng.lng()],
 				secret: "secretString"
 			}

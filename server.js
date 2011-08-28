@@ -273,17 +273,17 @@ app.get('/faction/:id', function(req, res){
 app.post('/tag', function(req, res) {
   
   var tagAttempt = req.body;
-  if (tagAttempt.username && tagAttempt.loc && tagAttempt.secret) {
+  if (tagAttempt.userId && tagAttempt.loc && tagAttempt.secret) {
     
 
     var newTag      = new Tag();
-    newTag.user     = tagAttempt.username;
+    newTag.user     = tagAttempt.userId;
     newTag.loc      = tagAttempt.loc;
     
     // need to add faction checker
 
     // check for tags near & remove them is so (but not mine)
-    removeTagsNear(newTag.loc, req.user.id);
+    removeTagsNear(newTag);
 
     newTag.save(function(err){
       if (err) {
@@ -315,8 +315,8 @@ app.get('/now', function(req, res){
 
 // FUNCTIONS
 
-function removeTagsNear(loc, myUserid) {
-  Tag.find({loc: {$near : loc, $maxDistance: 0.002}}, function(err, tags) {
+function removeTagsNear(newTag) {
+  Tag.find({loc: {$near : newTag.loc, $maxDistance: 0.002}}, function(err, tags) {
       
     if (err) {console.log("there was an error looking for neaby tags.", err);}
     else {
@@ -325,7 +325,7 @@ function removeTagsNear(loc, myUserid) {
       tags.map(function(tag){
 
         // only remove tags belonging to other people
-          if (myUserId != tag.user) {
+          if (newTag.user != tag.user) {
             Tag.remove({_id: tag._id}, function (err) {              
               if (err) {console.log("Error removing tag: ", tag)}
               else {
