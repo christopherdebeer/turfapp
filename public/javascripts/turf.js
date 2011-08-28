@@ -1,4 +1,4 @@
-alert("OI! no peeking!!");
+
 var turf = {
 	map: {},
 	tags: [],
@@ -102,8 +102,8 @@ var turf = {
 
 $(document).ready( function () {
 
-	turf.initMap(turf.locations.test);
-	turf.createCircle(turf.locations.edinburgh, 100);
+	turf.initMap(turf.locations.edinburgh);
+
 	$(turf.points).each( function (i,e) {
 		console.log(i,e);
 		var tmp = new google.maps.LatLng (e.loc[0], e.loc[1]);

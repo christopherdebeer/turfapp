@@ -39,11 +39,11 @@ h1 {
     display: block; }
     #content .inner #leftCol {
       width: 300px;
-      display: inline;
+      display: block;
       float: left;
       margin-right: 100px; }
     #content .inner #rightCol {
-      display: inline;
+      display: block;
       margin-left: 50px;
       padding-top: 103px;
       overflow: auto; }
