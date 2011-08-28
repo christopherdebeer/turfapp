@@ -374,6 +374,21 @@ function removeTagsNear(newTag) {
               if (err) {console.log("Error removing tag: ", tag)}
               else {
                 console.log("Removed a tag belonging to user: ", tag.user);
+                User.find({id: newTag.user}, function(err,user){
+                  var defensiveUser = tag.user;
+                  var offensiveUser = user.screenName;
+                  User.find({id: defensiveUser}, function(err,user){
+                    var action = "@"+ offensiveUser + "just claimed some of @" + user.screenName + " 's turf as their own.";
+                    twitterClient.updateStatus(action, 
+                    function(er, resp){
+                      if (!er) {
+                        console.log("Tweeted: ", action );
+                      } else {
+                        console.log("TwitBot error:", er);
+                      }
+                    });
+                  })
+                })
               }
             });
           }
