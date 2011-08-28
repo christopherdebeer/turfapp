@@ -176,14 +176,15 @@ app.get('/', function(req, res){
 
   options = {
     title: "Turf",
-    tags: {},
-    userObj: JSON.stringify(req.user)
+    tags: {}
   }
 
   if (req.user) {
     options.user = req.user;
+    options.userObj = JSON.stringify(req.user);
   } else {
     options.user = undefined;
+    options.userObj = "undefined";
   }
 
 
