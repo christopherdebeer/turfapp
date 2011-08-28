@@ -61,7 +61,8 @@ h1 {
   #users li {
     list-style: none; }
     #users li img {
-      float: left; }
+      float: left;
+      margin-right: 20px; }
     #users li .username, #users li .since {
       display: block; }
     #users li .since {
