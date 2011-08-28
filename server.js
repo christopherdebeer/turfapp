@@ -172,7 +172,7 @@ app.configure('production', function(){
 // Homepage //  main app
 app.get('/', function(req, res){
 
-  console.log("req.user: ", req.user);
+  
 
   options = {
     title: "Turf",
@@ -180,9 +180,12 @@ app.get('/', function(req, res){
   }
 
   if (req.user) {
+
+    console.log("User viewing: ", req.user);
+
     options.user = req.user;
     options.userObj = JSON.stringify(req.user);
-    Tag.find({user: req.user.twiter.id}, function (err, docs) {
+    Tag.find({user: req.user.twitter.id}, function (err, docs) {
 
       if (!err) {
         options.tags = JSON.stringify(docs);
@@ -195,6 +198,8 @@ app.get('/', function(req, res){
 
 
   } else {
+
+    console.log("Non-User Viewing.");
     options.user = undefined;
     options.userObj = "undefined";
     res.render('index', options);
