@@ -276,13 +276,13 @@ app.post('/tag', function(req, res) {
   if (tagAttempt.username && tagAttempt.loc && tagAttempt.secret) {
     
 
-    var newTag = new Tag();
-    newTag.user = tagAttempt.username;
+    var newTag      = new Tag();
+    newTag.user     = tagAttempt.username;
     newTag.loc      = tagAttempt.loc;
     
     // need to add faction checker
 
-    // check for tags near
+    // check for tags near & remove them is so
     removeTagsNear(newTag.loc);
 
     newTag.save(function(err){
@@ -293,7 +293,7 @@ app.post('/tag', function(req, res) {
           error: err
         }});
       } else {
-        res.send({result: "ok", msg: msg});
+        res.send({result: "ok"});
       }
     });
 
