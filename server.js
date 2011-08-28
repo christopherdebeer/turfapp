@@ -222,13 +222,19 @@ app.get('/contact', function(req, res){
 // users
 
 app.get('/users', function(req, res){
-  User.find({}, function(err,users) {
+  User.find({}, function(err,allUers) {
     
     if (err) {
-      res.render('users', {});
+      res.render('users', {
+        title: "No users? :(",
+        users: allUsers
+      });
     }
     else {
-      res.render('users', users);
+      res.render('users', {
+        title: "Turf :: Users",
+        users: allUsers
+      });
     }
 
 
