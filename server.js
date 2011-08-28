@@ -176,16 +176,18 @@ app.get('/', function(req, res){
 
   options = {
     title: "Turf",
-    tags: {}
+    tags: "undefined"
   }
 
   if (req.user) {
     options.user = req.user;
     options.userObj = JSON.stringify(req.user);
-    Tag.find({user: req.user.twiiter.id}, function (err, docs) {
+    Tag.find({user: req.user.twiter.id}, function (err, docs) {
 
       if (!err) {
         options.tags = JSON.stringify(docs);
+      } else {
+        throw err;
       }
       res.render('index', options);
       
