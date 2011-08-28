@@ -88,7 +88,7 @@ everyauth.everymodule
   .findUserById( function (userId, callback) {
     // tryign to find a fucking user
     console.log("Everyauth findUser by id... : ", util.inspect(userId));
-    console.log("Everyauth findUser callback... : ", util.inspect(callback))
+    console.log("Everyauth findUser callback... : ",callback, util.inspect(callback))
 
     User.find({twitter: {id: userId} }, callback);
 });
