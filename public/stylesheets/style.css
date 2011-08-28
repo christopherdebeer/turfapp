@@ -42,9 +42,9 @@ h1 {
       display: inline;
       float: left; }
     #content .inner #rightCol {
-      width: 450px;
       display: inline;
-      float: right;
+      margin-left: 50px;
+      margin-top: 103px;
       overflow: auto; }
       #content .inner #rightCol p {
         margin: 0;
