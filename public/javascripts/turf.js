@@ -133,7 +133,7 @@ $(document).ready( function () {
 			  type: "POST",
 			  success: function () {
 
-				turf.createCircle(event.latLng,100)
+				turf.createCircle("blue",event.latLng,100)
 	    		if (window.console) { console.log("tag created at location:", event.latLng); }
 	    		turf.tags.push(event.latLng);
 	    		// var newHull = turf.getConvexHullPoints(turf.tags);
