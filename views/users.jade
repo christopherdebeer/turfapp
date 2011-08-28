@@ -1,1 +1,8 @@
-h1 turf :: Users
+h1 #{title}
+ul#users
+	- for user in users
+		li 
+			img(src=#{user.twitter.avatarUrl})
+			span.username 
+				a(href="/user/#{user.twitter.screenName}") @#{user.twitter.screenName}
+			span.since #{user.created}

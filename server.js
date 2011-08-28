@@ -98,13 +98,14 @@ function addUser (source, sourceUser) {
     return usersById[nextUserId] = user;
   } else { // non-password-based
 
-    console.log("adding user - ", sourceUser.name)
+    console.log("adding user - ", sourceUser)
     user  = {id: sourceUser.id};
     user[source] = sourceUser;
     var newUser = new User();
     newUser.id = sourceUser.id;
     newUser.twitter.id = sourceUser.id;
     newUser.twitter.name = sourceUser.name;
+    newUser.twitter.screenName = sourceUser.screen_name;
     newUser.twitter.avatarUrl = sourceUser.profile_image_url;
 
     newUser.save(function(err){
@@ -222,7 +223,7 @@ app.get('/contact', function(req, res){
 // users
 
 app.get('/users', function(req, res){
-  User.find({}, function(err,allUers) {
+  User.find({}, function(err,allUsers) {
     
     if (err) {
       console.log("error on /users page", err);
