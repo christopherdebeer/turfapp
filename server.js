@@ -96,7 +96,7 @@ function addUser (source, sourceUser) {
     return usersById[nextUserId] = user;
   } else { // non-password-based
 
-    console.log("adding user - ", sourceUser.twitter.name)
+    console.log("adding user - ", sourceUser.twitter)
     user  = {id: sourceUser.twitter.id};
     user[source] = sourceUser;
     var newUser = new User();
