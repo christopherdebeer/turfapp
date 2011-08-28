@@ -225,6 +225,7 @@ app.get('/users', function(req, res){
   User.find({}, function(err,allUers) {
     
     if (err) {
+      console.log("error on /users page", err);
       res.render('users', {
         title: "No users? :(",
         users: allUsers
