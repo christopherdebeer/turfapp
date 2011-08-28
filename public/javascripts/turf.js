@@ -140,7 +140,7 @@ $(document).ready( function () {
 		}
 	});
 
-	if (turf.user.id == "19603732") {
+	if (turf.user && turf.user.id == "19603732") {
 		google.maps.event.addListener(turf.map, 'click', function(event) {
 			
 	    	turf.submitTag(event.latLng.lat(), event.latLng.lng());
