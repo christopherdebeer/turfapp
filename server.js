@@ -75,14 +75,7 @@ var User = mongoose.model('User', Person);
 
 everyauth.debug = true;
 var usersById = {};
-User.find({},function(err,docs){if(!err){usersById = docs;}})
-console.log("usersById: ", util.inspect(usersById));
 
-
-var nextUserId = 0;
-User.count({},function(err,count){
-  nextUserId = count;  
-});
 
 everyauth.everymodule
   .findUserById( function (userId, callback) {
@@ -175,7 +168,7 @@ app.configure('production', function(){
 // Homepage //  main app
 app.get('/', function(req, res){
 
-  console.log("reg user:", req.user)
+  console.log("reg user:", req.user);
 
   options = {
     title: "Turf",
