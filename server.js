@@ -284,7 +284,7 @@ app.post('/tag', function(req, res) {
 
     // check for tags near
     var msg;
-    Tag.find({loc: {$near : newTag.loc, $maxDistance: 0.001}}, function(err, tags) {
+    Tag.find({loc: {$near : newTag.loc, $maxDistance: 0.002}}, function(err, tags) {
       
       if (err) {console.log("there was an error looking for neaby tags.", err);}
       else {
