@@ -150,7 +150,7 @@ $(document).ready( function () {
 
 	$("#tagButton").click(function(e){
 		e.preventDefault();
-		if ($"html").hasClass("geolocation") {
+		if ($("html").hasClass("geolocation")) {
 			navigator.geolocation.getCurrentPosition(function (pos) {
 				turf.locations.user = new google.maps.LatLng (pos.coords.latitude, pos.coords.longitude);
 				if (turf.user) {
