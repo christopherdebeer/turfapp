@@ -1,2 +1,4 @@
 h1 turf :: Users
-p This is a list of users
+ul#users
+	- for each user in users
+		li User: #{user.twitter.name}
