@@ -283,8 +283,15 @@ app.post('/tag', function(req, res) {
     // need to add faction checker
 
     // check for tags near
+    var msg;
+    Tag.find({loc: {$near : newTag.loc, $maxDistance: 10}}, function(err, tags) {
+      
+      if (err) {console.log("there was an error looking for neaby tags.", err);}
+      else {
+        msg = tags;
+      }
 
-    Tag.find({})
+    });
 
     newTag.save(function(err){
       if (err) {
@@ -294,7 +301,7 @@ app.post('/tag', function(req, res) {
           error: err
         }});
       } else {
-        res.send({result: "ok"});
+        res.send({result: "ok", msg: msg});
       }
     });
 
