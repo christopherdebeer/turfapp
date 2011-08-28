@@ -37,6 +37,7 @@ var Faction = new Schema({
 var Person = new Schema({
     id          : { type: String, unique: true }
   , name        : String
+  , avatarUrl   : String
   , xp          : Number
   , faction     : String
   , created     : Date
@@ -85,6 +86,7 @@ function addUser (source, sourceUser) {
     var newUser = new User();
     newUser.id = sourceUser.id;
     newUser.name = sourceUser.name;
+    newUser.avatarUrl = sourceUser.profile_image_url;
     newUser.save(function(err){if (err) console.log("didnt add user due to error, most likely it existed");});
   }
   return user;

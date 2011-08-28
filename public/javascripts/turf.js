@@ -1,4 +1,4 @@
-
+alert("OI! no peeking!!");
 var turf = {
 	map: {},
 	tags: [],
