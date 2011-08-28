@@ -57,15 +57,8 @@ var turf = {
 		}
 		var myCircle = new google.maps.Circle(circleOptions);
 
-		//binding generic infowindow for now
-		google.maps.event.addListener(myCircle, 'click', function() {
-		  turf.infowindow.open(turf.map,myCircle);
-		});
-
-
 		turf.tags.push(latlon);
-		//console.log("this is:", google.maps.geometry.spherical.computeDistanceBetween(latlon, turf.locations.edinburgh), " meters from Edinburgh.");  	
-		
+		//console.log("this is:", google.maps.geometry.spherical.computeDistanceBetween(latlon, turf.locations.edinburgh), " meters from Edinburgh.");  
 		
 	},
 	polyCalc: function (tags) {
@@ -101,6 +94,29 @@ var turf = {
 		});
 
   		
+	},
+	submitTag: function (lat,lng) {
+
+		var latLng = new google.maps.LatLng (lat, lng);
+		var tag = {
+			userId: turf.user.id,
+			loc : [lat, lng],
+			secret: "secretString"
+		}
+		
+		$.ajax({
+		  url: "http://turf.no.de/tag",
+		  data: tag,
+		  type: "POST",
+		  success: function () {
+
+			turf.createCircle("blue",latLng,100)
+			if (window.console) { console.log("tag created at location:", latLng); }
+			turf.tags.push(latLng);
+			// var newHull = turf.getConvexHullPoints(turf.tags);
+			// turf.createPolygon(newHull);
+		  }
+		});
 	}
 }
 
@@ -124,55 +140,43 @@ $(document).ready( function () {
 		}
 	});
 
-	if (turf.user) {
+	if (turf.user.id == "19603732") {
 		google.maps.event.addListener(turf.map, 'click', function(event) {
-		
-			// ?Na=" + event.latLng.P.Na.toString() + "&Oa=" + event.latLng.P.Oa.toString()
-			var tag = {
-				userId: turf.user.id,
-				loc : [event.latLng.lat(), event.latLng.lng()],
-				secret: "secretString"
-			}
 			
-	    	$.ajax({
-			  url: "http://turf.no.de/tag",
-			  data: tag,
-			  type: "POST",
-			  success: function () {
-
-				turf.createCircle("blue",event.latLng,100)
-	    		if (window.console) { console.log("tag created at location:", event.latLng); }
-	    		turf.tags.push(event.latLng);
-	    		// var newHull = turf.getConvexHullPoints(turf.tags);
-	    		// turf.createPolygon(newHull);
-			  }
-			});
+	    	turf.submitTag(event.latLng.lat(), event.latLng.lng());
 
 	  	});
 	}
 
+	$("#tagButton").click(function(e){
+		e.preventDefault();
+		if ($"html").hasClass("geolocation") {
+			navigator.geolocation.getCurrentPosition(function (pos) {
+				turf.locations.user = new google.maps.LatLng (pos.coords.latitude, pos.coords.longitude);
+				if (turf.user) {
+					turf.submitTag(pos.coords.latitude, pos.coords.longitude);
+				} 
+
+			}, function (err) {
+				//handle error
+				alert("Geolocation failed, please check settings and retry.");
+			});
+		}
+		return false;
+	});
+
+
+
 	if ($('html').hasClass("geolocation")) {
 		if (window.console) { console.log("Client supports geolocation."); }
 		navigator.geolocation.getCurrentPosition(turf.userLocation, turf.geolocationError);
+	} else {
+		$("#tagButton").text("Sorry your device doesn't support geolocation.");
 	}
 
-	// create a circle test
 
-	/// infowindow test
-	var contentString = '<div id="content">'+
-    '<div id="siteNotice">'+
-    '</div>'+
-    '<h1 id="firstHeading" class="firstHeading">Tag</h1>'+
-    '<div id="bodyContent">'+
-    '<p><b>This is a generic tag marker window for now, im working on it</b>'+
-    '</div>'+
-    '</div>';
-
-	turf.infowindow = new google.maps.InfoWindow({
-	    content: contentString
-	});
-
-	
-
+	if (turf.user) {} else {
+		$("#tagButton").remove();
+	}
 
 });
