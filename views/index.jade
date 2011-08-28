@@ -7,6 +7,9 @@ h1
 			h2 Welcome to turf
 			p Turf is a geo-social warfare app, where you stake a claim to your territory, and fend off those that try claim it for themselves.
 
+
+			- if (user)
+				p YASS!!!!
 			p
 				a#twSignin(href="/auth/twitter") Login with twitter
 
@@ -20,4 +23,3 @@ script(src='https://raw.github.com/christopherdebeer/ConvexHull/master/convex_hu
 script(src='/javascripts/turf.js')
 script(type='text/javascript')
 	turf.points = !{tags};
-	turf.user = !{user};
