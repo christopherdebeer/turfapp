@@ -71,7 +71,7 @@ var turf = {
 		}
 		
 		$.ajax({
-		  url: "http://turf.no.de/tag",
+		  url: "/tag",
 		  data: tag,
 		  type: "POST",
 		  success: function () {
@@ -79,7 +79,7 @@ var turf = {
 			turf.createCircle("blue",latLng,100)
 			if (window.console) { console.log("tag created at location:", latLng); }
 			turf.tags.push(latLng);
-			window.location = window.location.href;
+			//window.location = window.location.href;
 			// var newHull = turf.getConvexHullPoints(turf.tags);
 			// turf.createPolygon(newHull);
 		  }
@@ -107,7 +107,7 @@ $(document).ready( function () {
 		}
 	});
 
-	if (turf.user && turf.user.id == "19603732") {
+	if (1) {
 		google.maps.event.addListener(turf.map, 'click', function(event) {
 			
 	    	turf.submitTag(event.latLng.lat(), event.latLng.lng());

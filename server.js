@@ -26,8 +26,8 @@ var express   = require('express'),
 
 var sys = require('sys')
   , tweasy = require("tweasy")
-  , OAuth = require("oauth").OAuth
-  ;
+  , OAuth = require("oauth").OAuth;
+
 var oauthConsumer = new OAuth(
     "http://twitter.com/oauth/request_token",
     "http://twitter.com/oauth/access_token", 
@@ -218,7 +218,7 @@ app.get('/', function(req, res){
 
   if (req.user) {
 
-    console.log("User viewing: ", req.user);
+    console.log("User viewing: ", req.user.twitter.screenName);
 
     options.user = req.user;
     options.userObj = JSON.stringify(req.user);
@@ -363,56 +363,107 @@ app.get('/now', function(req, res){
 // FUNCTIONS
 
 function removeTagsNear(newTag) {
-  Tag.find({loc: {$near : newTag.loc, $maxDistance: 0.002}}, function(err, tags) {
+  Tag.find({loc: {$near : newTag.loc, $maxDistance: 0.002}}, (function(newTag,err, tags) {
       
     if (err) {console.log("there was an error looking for neaby tags.", err);}
     else {
       console.log("there were tags near that tagAttempt, removing them", tags);
 
-      tags.map(function(tag){
 
-        // only remove tags belonging to other people
-          if (newTag.user != tag.user) {
+      //var newTag2 = newTag;
 
 
-            Tag.remove({_id: tag._id}, function (err) {              
-              if (err) {console.log("Error removing tag: ", tag)}
-              else {
 
-                console.log("Removed a tag belonging to user: ", tag.user);
-                // var dUser = tag.user;
-                // var oUser = newTag.user;
-                // console.log("DEEEEBUGGG!!!!! -----> oUser", oUser);
+      // find newTag user
 
+      User.findOne({id: newTag.user}, (function(tags, err, userA) {
+        if (err) {console.log("User not found: ", newTag.user)}
+        else {
+          console.log("User @", userA.twitter, " is on the offensive, removing surrounding tags.");
+          if (tags.length > 0) {
+            // For each tag
+          tags.map((function(userA, tag){
+            // if not belonging to same user
+            if (userA.id != tag.id) {
+              console.log("Removing tag ",tag.id, " belonging to ", tag.user);
+              Tag.remove({_id: tag._id}, (function(userA, err){
+                // if error
+                if (err) {console.log("Error removing tag: ", tag, " with error: ", err)}
+                else {
+                  User.findOne({id: tag.user}, (function(userA, err, userB){
+                    if (err) {console.log("Error finding user, ", err)}
+                    else {
 
-                // User.find({id: oUser}, function(err, userA){
+                      // Tweet the results
+                      var action = "@"+ userA.twitter.screenName + " just claimed some of @" + userB.twitter.screenName + " 's turf as their own.";
+                      twitterClient.updateStatus(action, function(er, resp){
+                        if (!er) {
+                          console.log("Tweeted: ", action );
+                        } else {
+                          console.log("TwitBot error:", er);
+                        }
+                      });
+                    }
+                  }).bind(null,userA))
+                }
+              }).bind(null,userA))
+            }
 
-                //   var offensiveUser = userA.twitter.screenName;
-                //   console.log("RESULLT OF FIND on above oUser:", offensiveUser);
-                //   var defensiveUser = dUser;
-                  
-
-                //   User.find({id: defensiveUser}, function(err, userB){
-
-                //     var action = "@"+ offensiveUser + " just claimed some of @" + userB.twitter.screenName + " 's turf as their own.";
-
-                //     twitterClient.updateStatus(action, function(er, resp){
-                //       if (!er) {
-                //         console.log("Tweeted: ", action );
-                //       } else {
-                //         console.log("TwitBot error:", er);
-                //       }
-                //     });
-                //   })
-                // })
-              }
-            });
+          }).bind(null, userA));
+          } else {
+            console.log("No surrounding tags.");
           }
-      });
+        }
+
+      }).bind(null,tags));
+
+
+
+
+
+      // tags.map(function(tag){
+
+      //   // only remove tags belonging to other people
+      //     if (newTag2.user != tag.user) {
+
+
+      //       Tag.remove({_id: tag._id}, (function (newTag2, err) {              
+      //         if (err) {console.log("Error removing tag: ", tag)}
+      //         else {
+
+      //           var dUser = tag.user;
+      //           var oUser = newTag2.user; 
+                
+      //           console.log("TAG USERS: D: ", dUser," O: ", oUser);
+                             
+
+
+      //           User.find({id: oUser}, (function(oUser, err, userA){
+                  
+      //             console.log("USER A: ", userA);
+      //             User.find({id: dUser}, (function(userA, err, userB){
+
+      //               console.log("USER B: ", userB);
+      //               var action = "@"+ userA.twitter.screenName + " just claimed some of @" + userB.twitter.screenName + " 's turf as their own.";
+
+      //               twitterClient.updateStatus(action, function(er, resp){
+      //                 if (!er) {
+      //                   console.log("Tweeted: ", action );
+      //                 } else {
+      //                   console.log("TwitBot error:", er);
+      //                 }
+      //               });
+
+      //             }).bind(null, userA));
+      //           }).bind(null, oUser));
+      //         }
+      //       }).bind(null, newTag2));
+      //     }
+      // });
 
     }
 
-  });
+  }).bind(null, newTag));
 }
 
 
