@@ -379,7 +379,7 @@ function removeTagsNear(newTag) {
       User.findOne({id: newTag.user}, (function(tags, err, userA) {
         if (err) {console.log("User not found: ", newTag.user)}
         else {
-          console.log("User @", userA.twitter, " is on the offensive, removing surrounding tags.");
+          console.log("User @", userA.twitter.screenName, " is on the offensive, removing surrounding tags.");
           if (tags.length > 0) {
             // For each tag
           tags.map((function(userA, tag){
