@@ -1,5 +1,5 @@
 // Node knockout 
-require('nko')('4mmjIcGPANGpqTsG');
+// require('nko')('4mmjIcGPANGpqTsG');
 // Team Nodule
 
 /**
@@ -10,7 +10,7 @@ require('nko')('4mmjIcGPANGpqTsG');
 var express   = require('express'),
     mongoose  = require('mongoose'),
     everyauth = require ('everyauth'),
-    connect   = require('connect'),
+    //connect   = require('connect'),
     util      = require('util');
     //TwBot     = require('twbot').TwBot;
 

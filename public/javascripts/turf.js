@@ -61,40 +61,6 @@ var turf = {
 		//console.log("this is:", google.maps.geometry.spherical.computeDistanceBetween(latlon, turf.locations.edinburgh), " meters from Edinburgh.");  
 		
 	},
-	polyCalc: function (tags) {
-		for (var point in tags) {
-			for (var point2 in tags) {
-				
-			} 
-		}
-	},
-	getConvexHullPoints: function (points) {
-		console.log("Try make convex hull of all points (",turf.tags.length,") in turf.tags: ", turf.tags);
-		
-		var hullPoints = [];
-		var hullPoints_size;
-
-		points.sort(convex_hull.sortPointY);
-		points.sort(convex_hull.sortPointX);
-		hullPoints_size = convex_hull.chainHull_2D(points, points.length, turf.hullPoints);
-
-		return turf.hullPoints;
-	},
-	createPolygon: function (points) {
-
-		console.log("Create a polygon of (",points.length,") points: ", points);
-		var newPoly = new google.maps.Polygon({
-		    paths: points,
-		    strokeColor: "#FF0000",
-		    strokeOpacity: 0.8,
-		    strokeWeight: 2,
-		    fillColor: "#FF0000",
-		    fillOpacity: 0.35,
-		    map: turf.map
-		});
-
-  		
-	},
 	submitTag: function (lat,lng) {
 
 		var latLng = new google.maps.LatLng (lat, lng);
